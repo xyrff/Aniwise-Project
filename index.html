@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" , initial-scale="1.0">
+    <title>AniWise - Smart Crop Recommendation System</title>
+
+    <!-- Icon Library for leaf, wheat, flask icons etc.-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ============================================
+                    HEADER / NAVIGATION
+         ============================================ -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <!-- Logo + brand name -->
+            <div class="brand">
+                <div class="brand-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div>
+                    <span class="brand-name">Ani<span class="brand-accent">Wise</span></span>
+                    <span class="brand-tagline">Smart Crop Recommendation</span>
+                </div>
+            </div>
+
+            <!-- Nav links (desktop) -->
+            <nav class="nav-links">
+                <button class="nav-btn nav-btn-active"><i class="fa-solid fa-house"></i> Home</button>
+                <button class="nav-btn"><i class="fa-solid fa-seedling"></i> Crop Recommendation</button>
+                <button class="nav-btn"><i class="fa-solid fa-chart-line"></i> Yield Prediction</button>
+                <button class="nav-btn"><i class="fa-solid fa-cloud-sun-rain"></i> Weather Forecast</button>
+                <button class="nav-btn" onclick="scrollToSection('about-section')"><i
+                        class="fa-solid fa-circle-info"></i> About</button>
+            </nav>
+
+            <!-- Hamburger button (mobile only) -->
+            <button id="mobile-menu-btn" class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile dropdown menu — hidden by default, toggled by script.js -->
+        <div id="mobile-menu" class="mobile-menu">
+            <button class="mobile-menu-item">Home</button>
+            <button class="mobile-menu-item">Crop Recommendation</button>
+            <button class="mobile-menu-item">Yield Prediction</button>
+            <button class="mobile-menu-item">Weather</button>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============================================
+     HERO SECTION
+     ============================================ -->
+        <div class="hero">
+            <!-- Decorative glow circles, purely visual, positioned behind content -->
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
+
+            <div class="container hero-inner">
+
+                <!-- Left side: headline + text -->
+                <div class="hero-text">
+                    <span class="hero-badge">
+                        <i class="fa-solid fa-microchip"></i> Machine Learning-Based Crop Recommendation
+                    </span>
+                    <h1 class="hero-title">
+                        Smart Agriculture with <span class="hero-title-accent">AI Predictions</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Modernize your agricultural practices using AI-driven technology. Experience access to crop
+                        recommendation, yield predictions, and weather forecasts all in one platform.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary btn-large" onclick="scrollToSection('features-section')">
+                            <i class="fa-solid fa-chart-line"></i> Start Predicting
+                        </button>
+                        <button class="btn btn-outline btn-large" onclick="scrollToSection('about-section')">
+                            <i class="fa-solid fa-circle-info"></i> Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right side: custom farm illustration (SVG, no image licensing needed) -->
+                <div class="hero-illustration">
+                    <svg viewBox="0 0 400 340" class="hero-svg" xmlns="http://www.w3.org/2000/svg">
+                        <!-- ground -->
+                        <ellipse cx="200" cy="300" rx="170" ry="24" fill="rgba(255,255,255,0.08)" />
+
+                        <!-- sun -->
+                        <circle cx="320" cy="70" r="34" fill="rgba(255,255,255,0.18)" />
+                        <circle cx="320" cy="70" r="20" fill="rgba(255,255,255,0.35)" />
+
+                        <!-- rows of crop leaves -->
+                        <g fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="4" stroke-linecap="round">
+                            <path d="M90 280 V210" />
+                            <path d="M90 230 C70 220 60 200 65 185" />
+                            <path d="M90 230 C110 220 120 200 115 185" />
+
+                            <path d="M160 290 V200" />
+                            <path d="M160 225 C138 213 128 190 133 173" />
+                            <path d="M160 225 C182 213 192 190 187 173" />
+                            <path d="M160 250 C140 242 132 225 136 212" />
+                            <path d="M160 250 C180 242 188 225 184 212" />
+
+                            <path d="M230 280 V210" />
+                            <path d="M230 230 C210 220 200 200 205 185" />
+                            <path d="M230 230 C250 220 260 200 255 185" />
+
+                            <path d="M290 290 V220" />
+                            <path d="M290 245 C272 236 264 218 268 205" />
+                            <path d="M290 245 C308 236 316 218 312 205" />
+                        </g>
+
+                        <!-- small leaf badge accent, top left -->
+                        <circle cx="55" cy="60" r="22" fill="rgba(255,255,255,0.12)" />
+                        <path d="M46 60 C46 50 54 44 64 44 C64 54 58 62 46 60 Z" fill="rgba(255,255,255,0.5)" />
+                    </svg>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================
+             FEATURES SECTION
+             ============================================ -->
+        <div class="container features-section" id="features-section">
+
+            <div class="section-heading">
+                <h2>Powerful Features for <span class="section-heading-accent">Modern Farming</span></h2>
+                <p>Leverage the power of artificial intelligence to make informed decisions and maximize your
+                    agricultural productivity.</p>
+            </div>
+
+            <div class="features-grid features-grid-3">
+
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-seedling"></i></div>
+                    <h3>Crop Recommendation</h3>
+                    <p>Input soil nutrients (N-P-K), temperature, humidity, pH, and rainfall to receive ranked crop
+                        matches with a confidence score.</p>
+                    <span class="feature-link">Try Now <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="feature-title-row">
+                        <h3>Yield Prediction</h3>
+                    </div>
+                    <p>A future-work module estimating expected harvest yield. Currently a stretch goal, not part of the
+                        core deliverable.</p>
+                    <span class="feature-link">Try Now <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-cloud-sun-rain"></i></div>
+                    <div class="feature-title-row">
+                        <h3>Weather Forecast</h3>
+                    </div>
+                    <p>Real-time weather data for your location, used to auto-fill temperature, humidity, and rainfall
+                        for the crop recommendation form.</p>
+                    <span class="feature-link">Try Now <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+
+            </div>
+        </div>
+
+        <section class="about" id="about-section">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Our AI-powered platform makes agricultural predictions simple and accurate in just three steps.</p>
+
+            </div>
+
+            <div class="steps-container">
+                <!-- Step 1 -->
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="icon-circle">
+                        <!-- Tray/Upload Icon -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 17v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-2" />
+                            <polyline points="8 9 12 5 16 9" />
+                            <line x1="12" y1="5" x2="12" y2="15" />
+                        </svg>
+                    </div>
+                    <h3 class="step-title">Input Data</h3>
+                    <p class="step-description">Enter your farm details, crop information, and environmental conditions
+                        through our user-friendly interface.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="icon-circle">
+                        <!-- Brain Icon -->
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 3a4.5 4.5 0 0 0-4.33 3.27A4.002 4.002 0 0 0 4 10c0 1.51.84 2.82 2.08 3.51A4.502 4.502 0 0 0 11 18h1v3h-2v2h8v-2h-2v-3h1a4.502 4.502 0 0 0 4.92-4.49C21.16 12.82 22 11.51 22 10a4.002 4.002 0 0 0-3.67-3.73A4.5 4.5 0 0 0 14 3h-2zm-1 2h1a2.5 2.5 0 0 1 2.5 2.5v.5h.5A2 2 0 0 1 17 10a2 2 0 0 1-1.38 1.9 2.5 2.5 0 0 1-4.62.6V5zm-2 2.5A2.5 2.5 0 0 1 11.5 5H11v7.5A2.5 2.5 0 0 1 6.38 11.9 2 2 0 0 1 5 10a2 2 0 0 1 2-2h.5v-.5A2.5 2.5 0 0 1 9 7.5z" />
+                        </svg>
+                    </div>
+                    <h3 class="step-title">AI Analysis</h3>
+                    <p class="step-description">Our advanced machine learning algorithms analyze your data and generate
+                        accurate predictions and recommendations.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="icon-circle">
+                        <!-- Pie Chart Icon -->
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 2.07A8 8 0 0 1 19.93 11H13ZM11 4.07V13h8.93A8 8 0 1 1 11 4.07z" />
+                        </svg>
+                    </div>
+                    <h3 class="step-title">Get Results</h3>
+                    <p class="step-description">Receive detailed insights, predictions, and actionable recommendations
+                        to optimize your farming practices.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================
+                            FOOTER
+     ============================================ -->
+        <footer class="site-footer">
+            <div class="container footer-inner">
+
+                <div class="footer-brand">
+                    <div class="footer-brand-icon"><i class="fa-solid fa-leaf"></i></div>
+                    <div>
+                        <span class="footer-brand-name">Ani<span class="footer-brand-accent">Wise</span></span>
+                        <p class="footer-tagline">Smart Crop Recommendation System</p>
+                    </div>
+                </div>
+
+                <div class="footer-links-group">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#" onclick="scrollToSection('features-section')">Features</a></li>
+                        <li><a href="#" onclick="scrollToSection('about-section')">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-group">
+                    <h4>Tech Stack</h4>
+                    <ul class="footer-links footer-links-static">
+                        <li>Python & Flask Backend</li>
+                        <li>Scikit-Learn / XGBoost Model</li>
+                        <li>HTML, CSS, JavaScript Frontend</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 AniWise — An ML-Based Crop Recommendation System.</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
