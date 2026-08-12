@@ -1,0 +1,209 @@
+/* =========================================================
+   ANIWISE — YIELD PREDICTION PAGE
+   ========================================================= */
+
+
+/* --- Main Section --- */
+
+.yield-section {
+    padding: 70px 20px 40px;
+}
+
+
+/* --- Container --- */
+
+.yield-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+/* --- Main Card --- */
+
+.yield-card {
+    background: white;
+    border: 1px solid var(--agri-200);
+    border-radius: 18px;
+    padding: 42px;
+    box-shadow: var(--card-shadow);
+}
+
+
+/* --- Heading --- */
+
+.yield-heading {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.yield-heading h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--agri-900);
+    margin-bottom: 8px;
+}
+
+.yield-heading h1 i {
+    color: var(--agri-700);
+    margin-right: 8px;
+}
+
+.yield-heading p {
+    color: var(--slate-600);
+    font-size: 14px;
+}
+
+
+/* --- Form Grid --- */
+
+.yield-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+
+/* --- Form Field --- */
+
+.yield-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.yield-field label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--slate-700);
+}
+
+
+/* --- Inputs --- */
+
+.yield-field input,
+.yield-field select {
+    width: 100%;
+    padding: 12px 14px;
+
+    border: 1px solid var(--slate-200);
+    border-radius: 10px;
+
+    background: white;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    color: var(--slate-900);
+
+    outline: none;
+
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+
+
+/* --- Input Focus --- */
+
+.yield-field input:focus,
+.yield-field select:focus {
+    border-color: var(--agri-700);
+
+    box-shadow:
+        0 0 0 3px var(--agri-100);
+}
+
+
+/* --- Predict Button --- */
+
+.yield-predict-btn {
+    display: flex;
+    width: fit-content;
+
+    margin: 32px auto 0;
+
+    padding: 13px 28px;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   PREDICTION RESULTS
+   ========================================================= */
+
+.yield-results {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 20px auto 80px;
+
+    padding: 0 20px;
+}
+
+.yield-result-card {
+    background: white;
+
+    border: 1px solid var(--slate-200);
+    border-radius: 18px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    box-shadow: var(--card-shadow);
+
+    color: var(--slate-500);
+}
+
+.yield-result-card i {
+    font-size: 40px;
+    color: var(--agri-700);
+    margin-bottom: 16px;
+}
+
+.yield-result-card h2 {
+    font-size: 20px;
+    color: var(--slate-900);
+    margin-bottom: 8px;
+}
+
+.yield-result-card p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .yield-section {
+        padding: 40px 16px 30px;
+    }
+
+    .yield-card {
+        padding: 24px 20px;
+    }
+
+    .yield-heading h1 {
+        font-size: 24px;
+    }
+
+    .yield-form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .yield-predict-btn {
+        width: 100%;
+    }
+
+    .yield-results {
+        padding: 0 16px;
+    }
+
+}

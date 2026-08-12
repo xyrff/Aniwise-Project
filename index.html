@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" , initial-scale="1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AniWise - Smart Crop Recommendation System</title>
 
     <!-- Icon Library for leaf, wheat, flask icons etc.-->
@@ -14,7 +14,7 @@
         rel="stylesheet">
 
     <!-- CSS Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
@@ -36,26 +36,23 @@
             <!-- Nav links (desktop) -->
             <nav class="nav-links">
                 <button class="nav-btn nav-btn-active"><i class="fa-solid fa-house"></i> Home</button>
-                <button class="nav-btn"><i class="fa-solid fa-seedling"></i> Crop Recommendation</button>
-                <button class="nav-btn"><i class="fa-solid fa-chart-line"></i> Yield Prediction</button>
-                <button class="nav-btn"><i class="fa-solid fa-cloud-sun-rain"></i> Weather Forecast</button>
-                <button class="nav-btn" onclick="scrollToSection('about-section')"><i
-                        class="fa-solid fa-circle-info"></i> About</button>
+                <a href="crop-recommendation.html" class="nav-btn">
+                    <i class="fa-solid fa-seedling"></i>
+                    Crop Recommendation
+                </a>
+                <a href="yield.html" class="nav-btn">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Yield Prediction
+                    <a href="#weather-section" class="nav-btn">
+                        <i class="fa-solid fa-cloud-sun-rain"></i>
+                        Weather Forecast
+                    </a>
+                    <a href="about.html" class="nav-btn">
+                        <i class="fa-solid fa-circle-info"></i>
+                        About
+                    </a>
             </nav>
 
-            <!-- Hamburger button (mobile only) -->
-            <button id="mobile-menu-btn" class="mobile-menu-btn">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
-
-        <!-- Mobile dropdown menu — hidden by default, toggled by script.js -->
-        <div id="mobile-menu" class="mobile-menu">
-            <button class="mobile-menu-item">Home</button>
-            <button class="mobile-menu-item">Crop Recommendation</button>
-            <button class="mobile-menu-item">Yield Prediction</button>
-            <button class="mobile-menu-item">Weather</button>
-        </div>
     </header>
 
     <main>
@@ -151,7 +148,9 @@
                     <h3>Crop Recommendation</h3>
                     <p>Input soil nutrients (N-P-K), temperature, humidity, pH, and rainfall to receive ranked crop
                         matches with a confidence score.</p>
-                    <span class="feature-link">Try Now <i class="fa-solid fa-arrow-right"></i></span>
+                    <a href="crop-recommendation.html" class="feature-link">
+                        Try Now <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
 
                 <!-- Feature 2 -->
@@ -162,7 +161,10 @@
                     </div>
                     <p>A future-work module estimating expected harvest yield. Currently a stretch goal, not part of the
                         core deliverable.</p>
-                    <span class="feature-link">Try Now <i class="fa-solid fa-arrow-right"></i></span>
+                    <a href="yield.html" class="feature-link">
+                        Try Now
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
 
                 <!-- Feature 3 -->
@@ -179,9 +181,14 @@
             </div>
         </div>
 
+
+        <!-- ============================================
+             HOW IT WORKS SECTION
+             ============================================ -->
+
         <section class="about" id="about-section">
             <div class="section-header">
-                <h2>How It Works</h2>
+                <h2>How It <span class="section-heading-accent">Works</span></h2>
                 <p>Our AI-powered platform makes agricultural predictions simple and accurate in just three steps.</p>
 
             </div>
@@ -278,8 +285,7 @@
 
     </main>
 
-    <script src="script.js"></script>
-
+    <script src="js/script.js"></script>
 </body>
 
 </html>

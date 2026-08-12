@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AniWise - Crop Yield Prediction</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Yield Prediction CSS -->
+    <link rel="stylesheet" href="css/yield.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+            <!-- Logo -->
+            <div class="brand">
+
+                <div class="brand-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+                <div>
+                    <span class="brand-name">
+                        Ani<span class="brand-accent">Wise</span>
+                    </span>
+
+                    <span class="brand-tagline">
+                        Smart Crop Recommendation
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!-- Navigation -->
+            <nav class="nav-links">
+
+                <a href="index.html" class="nav-btn">
+                    <i class="fa-solid fa-house"></i>
+                    Home
+                </a>
+
+                <a href="crop-recommendation.html" class="nav-btn">
+                    <i class="fa-solid fa-seedling"></i>
+                    Crop Recommendation
+                </a>
+
+                <a href="yield-prediction.html" class="nav-btn nav-btn-active">
+
+                    <i class="fa-solid fa-chart-line"></i>
+                    Yield Prediction
+
+                </a>
+
+                <button class="nav-btn">
+                    <i class="fa-solid fa-cloud-sun-rain"></i>
+                    Weather Forecast
+                </button>
+
+                <a href="index.html#about-section" class="nav-btn">
+                    <i class="fa-solid fa-circle-info"></i>
+                    About
+                </a>
+
+            </nav>
+
+        </div>
+
+
+        <main>
+
+            <section class="yield-section">
+
+                <div class="yield-container">
+
+                    <div class="yield-card">
+
+                        <!-- Heading -->
+                        <div class="yield-heading">
+
+                            <h1>
+                                <i class="fa-solid fa-chart-line"></i>
+                                Crop Yield <span class="section-heading-accent">Prediction</span>
+                            </h1>
+
+                            <p>
+                                Enter your farm conditions to get accurate yield predictions.
+                            </p>
+
+                        </div>
+
+
+                        <!-- Form -->
+                        <form id="yield-form">
+
+                            <div class="yield-form-grid">
+
+
+                                <!-- Target Crop -->
+                                <div class="yield-field">
+
+                                    <label for="target-crop">
+                                        Target Crop
+                                    </label>
+
+                                    <select id="target-crop" required>
+
+                                        <option value="">
+                                            Select a crop
+                                        </option>
+
+                                        <option value="rice">
+                                            Rice
+                                        </option>
+
+                                        <option value="maize">
+                                            Maize
+                                        </option>
+
+                                        <option value="potatoes">
+                                            Potatoes
+                                        </option>
+
+                                        <option value="wheat">
+                                            Wheat
+                                        </option>
+
+                                        <option value="tomato">
+                                            Tomato
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- Annual Rainfall -->
+                                <div class="yield-field">
+
+                                    <label for="annual-rainfall">
+                                        Annual Rainfall (mm)
+                                    </label>
+
+                                    <input type="number" id="annual-rainfall" placeholder="e.g., 800" step="0.1"
+                                        required>
+
+                                </div>
+
+
+                                <!-- Pesticide Use -->
+                                <div class="yield-field">
+
+                                    <label for="pesticide-use">
+                                        Pesticide Use (tonnes)
+                                    </label>
+
+                                    <input type="number" id="pesticide-use" placeholder="e.g., 150" step="0.1" required>
+
+                                </div>
+
+
+                                <!-- Average Temperature -->
+                                <div class="yield-field">
+
+                                    <label for="average-temperature">
+                                        Average Temperature (°C)
+                                    </label>
+
+                                    <input type="number" id="average-temperature" placeholder="e.g., 25" step="0.1"
+                                        required>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Predict Button -->
+                            <button type="submit" class="btn btn-primary yield-predict-btn">
+
+                                <i class="fa-solid fa-calculator"></i>
+
+                                Run Yield Prediction
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Prediction Result -->
+            <section class="yield-results" id="yield-results">
+
+                <div class="yield-result-card">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    <h2>
+                        No prediction yet
+                    </h2>
+
+                    <p>
+                        Enter your farm conditions above and click
+                        <strong>Predict Yield</strong> to see the predicted crop yield.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </header>
+
+</body>
+
+</html>

@@ -1,0 +1,902 @@
+/* ==========================================================================
+   AniWise — Crop Recommendation Stylesheet
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. PAGE SECTION
+   ========================================================================== */
+
+.page-section {
+    padding: 24px 20px;
+
+    scroll-margin-top: 84px;
+}
+
+.page-heading {
+    text-align: center;
+
+    max-width: 640px;
+
+    margin: 0 auto 22px;
+}
+
+.page-heading h2 {
+    font-size: 30px;
+    font-weight: 800;
+
+    color: var(--slate-900);
+
+    margin-bottom: 6px;
+}
+
+.page-heading p {
+    color: var(--slate-600);
+}
+
+
+/* ==========================================================================
+   2. CROP FEATURE
+   ========================================================================== */
+
+.crop-feature {
+    width: 100%;
+
+    max-width: 750px;
+
+    margin: 0 auto;
+}
+
+
+/* ==========================================================================
+   3. FORM CARD
+   ========================================================================== */
+
+.crop-feature .form-card {
+    width: 100%;
+
+    background: white;
+
+    padding: 26px;
+
+    border-radius: 18px;
+
+    border: 1px solid var(--slate-200);
+
+    box-shadow: var(--card-shadow);
+
+    margin: 0 auto;
+}
+
+.form-card {
+    background: white;
+
+    padding: 32px;
+
+    border-radius: 16px;
+
+    border: 1px solid var(--slate-200);
+
+    box-shadow: var(--card-shadow);
+}
+
+
+/* ==========================================================================
+   4. FORM LABELS
+   ========================================================================== */
+
+.form-section-label {
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.04em;
+
+    color: var(--agri-700);
+
+    margin-bottom: 12px;
+}
+
+.form-section-label-spaced {
+    margin-top: 24px;
+}
+
+.form-section-note {
+    color: var(--slate-500);
+
+    text-transform: none;
+
+    font-weight: 500;
+}
+
+
+/* ==========================================================================
+   5. FORM ROWS
+   ========================================================================== */
+
+.form-row {
+    display: grid;
+
+    gap: 16px;
+
+    margin-bottom: 16px;
+}
+
+.form-row-2 {
+    grid-template-columns: 1fr 1fr;
+}
+
+.form-row-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+/* ==========================================================================
+   6. FORM FIELDS
+   ========================================================================== */
+
+.form-field {
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 16px;
+}
+
+.form-field label {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.03em;
+
+    color: var(--slate-700);
+
+    margin-bottom: 6px;
+}
+
+.form-field input,
+.form-field select {
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    border: 1px solid var(--slate-200);
+
+    font-size: 14px;
+
+    color: var(--slate-900);
+
+    outline: none;
+
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+    border-color: var(--agri-700);
+
+    box-shadow: 0 0 0 3px var(--agri-100);
+}
+
+.form-hint {
+    font-size: 11px;
+
+    color: var(--slate-500);
+
+    line-height: 1.5;
+
+    margin-bottom: 8px;
+}
+
+.btn-block {
+    width: 100%;
+
+    margin-top: 8px;
+}
+
+
+/* ==========================================================================
+   7. RESULTS SECTION
+   ========================================================================== */
+
+.results-section {
+    width: 100%;
+
+    margin-top: 60px;
+
+    padding-bottom: 80px;
+}
+
+.results-heading {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 24px;
+}
+
+.results-label {
+    display: block;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+    color: var(--agri-700);
+
+    margin-bottom: 6px;
+}
+
+.results-heading h2 {
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: var(--slate-900);
+
+    margin-bottom: 6px;
+}
+
+.results-heading p {
+    font-size: 14px;
+
+    color: var(--slate-500);
+}
+
+
+/* ==========================================================================
+   8. RESULTS LIST
+   ========================================================================== */
+
+.results-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    transition: opacity 0.3s ease;
+}
+
+.results-list.is-loading {
+    opacity: 0.5;
+}
+
+
+/* ==========================================================================
+   9. RESULT CARD
+   ========================================================================== */
+
+.result-card {
+    width: 100%;
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    border: 1px solid var(--slate-200);
+
+    box-shadow: var(--card-shadow);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+}
+
+.result-card-top {
+    border-left: 4px solid var(--agri-700);
+}
+
+.result-title-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 6px;
+}
+
+.result-title-row h4 {
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: var(--slate-900);
+}
+
+.result-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 16px;
+
+    font-size: 12px;
+
+    color: var(--slate-500);
+}
+
+
+/* ==========================================================================
+   10. EMPTY RESULTS
+   ========================================================================== */
+
+.empty-results {
+    background: white;
+
+    border: 2px dashed var(--slate-200);
+
+    border-radius: 18px;
+
+    padding: 60px 30px;
+
+    text-align: center;
+
+    color: var(--slate-500);
+}
+
+.empty-results i {
+    font-size: 42px;
+
+    color: var(--agri-700);
+
+    margin-bottom: 16px;
+}
+
+.empty-results h3 {
+    color: var(--slate-900);
+
+    font-size: 20px;
+
+    margin-bottom: 8px;
+}
+
+.empty-results p {
+    max-width: 500px;
+
+    margin: 0 auto;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* ==========================================================================
+   11. RESULTS NOTE
+   ========================================================================== */
+
+.results-note {
+    font-size: 12px;
+
+    color: var(--slate-500);
+
+    margin-top: 16px;
+
+    line-height: 1.5;
+}
+
+.results-note code {
+    background: var(--slate-100);
+
+    padding: 2px 6px;
+
+    border-radius: 4px;
+}
+
+
+/* ==========================================================================
+   12. CROP BADGES
+   ========================================================================== */
+
+.badge-green {
+    background: var(--agri-100);
+
+    color: var(--agri-800);
+
+    font-size: 12px;
+
+    padding: 4px 12px;
+}
+
+.badge-green-solid {
+    background: var(--agri-700);
+
+    color: white;
+}
+
+.badge-gray {
+    background: var(--slate-100);
+
+    color: var(--slate-700);
+}
+
+
+/* ==========================================================================
+   13. CROP BUTTONS
+   ========================================================================== */
+
+.btn-light {
+    background-color: var(--slate-100);
+
+    color: var(--slate-700);
+
+    font-size: 12px;
+
+    padding: 10px 16px;
+}
+
+.btn-light:hover {
+    background-color: var(--slate-200);
+}
+
+
+/* ==========================================================================
+   AniWise — Crop Recommendation Stylesheet
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. PAGE SECTION
+   ========================================================================== */
+
+.page-section {
+    padding: 24px 20px;
+
+    scroll-margin-top: 84px;
+}
+
+.page-heading {
+    text-align: center;
+
+    max-width: 640px;
+
+    margin: 0 auto 22px;
+}
+
+.page-heading h2 {
+    font-size: 30px;
+    font-weight: 800;
+
+    color: var(--slate-900);
+
+    margin-bottom: 6px;
+}
+
+.page-heading p {
+    color: var(--slate-600);
+}
+
+
+/* ==========================================================================
+   2. CROP FEATURE
+   ========================================================================== */
+
+.crop-feature {
+    width: 100%;
+
+    max-width: 750px;
+
+    margin: 0 auto;
+}
+
+
+/* ==========================================================================
+   3. FORM CARD
+   ========================================================================== */
+
+.crop-feature .form-card {
+    width: 100%;
+
+    background: white;
+
+    padding: 26px;
+
+    border-radius: 18px;
+
+    border: 1px solid var(--slate-200);
+
+    box-shadow: var(--card-shadow);
+
+    margin: 0 auto;
+}
+
+.form-card {
+    background: white;
+
+    padding: 32px;
+
+    border-radius: 16px;
+
+    border: 1px solid var(--slate-200);
+
+    box-shadow: var(--card-shadow);
+}
+
+
+/* ==========================================================================
+   4. FORM LABELS
+   ========================================================================== */
+
+.form-section-label {
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.04em;
+
+    color: var(--agri-700);
+
+    margin-bottom: 12px;
+}
+
+.form-section-label-spaced {
+    margin-top: 24px;
+}
+
+.form-section-note {
+    color: var(--slate-500);
+
+    text-transform: none;
+
+    font-weight: 500;
+}
+
+
+/* ==========================================================================
+   5. FORM ROWS
+   ========================================================================== */
+
+.form-row {
+    display: grid;
+
+    gap: 16px;
+
+    margin-bottom: 16px;
+}
+
+.form-row-2 {
+    grid-template-columns: 1fr 1fr;
+}
+
+.form-row-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+/* ==========================================================================
+   6. FORM FIELDS
+   ========================================================================== */
+
+.form-field {
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 16px;
+}
+
+.form-field label {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.03em;
+
+    color: var(--slate-700);
+
+    margin-bottom: 6px;
+}
+
+.form-field input,
+.form-field select {
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    border: 1px solid var(--slate-200);
+
+    font-size: 14px;
+
+    color: var(--slate-900);
+
+    outline: none;
+
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+    border-color: var(--agri-700);
+
+    box-shadow: 0 0 0 3px var(--agri-100);
+}
+
+.form-hint {
+    font-size: 11px;
+
+    color: var(--slate-500);
+
+    line-height: 1.5;
+
+    margin-bottom: 8px;
+}
+
+.btn-block {
+    width: 100%;
+
+    margin-top: 8px;
+}
+
+
+/* ==========================================================================
+   7. RESULTS SECTION
+   ========================================================================== */
+
+.results-section {
+    width: 100%;
+
+    margin-top: 60px;
+
+    padding-bottom: 80px;
+}
+
+.results-heading {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 24px;
+}
+
+.results-label {
+    display: block;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+    color: var(--agri-700);
+
+    margin-bottom: 6px;
+}
+
+.results-heading h2 {
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: var(--slate-900);
+
+    margin-bottom: 6px;
+}
+
+.results-heading p {
+    font-size: 14px;
+
+    color: var(--slate-500);
+}
+
+
+/* ==========================================================================
+   8. RESULTS LIST
+   ========================================================================== */
+
+.results-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    transition: opacity 0.3s ease;
+}
+
+.results-list.is-loading {
+    opacity: 0.5;
+}
+
+
+/* ==========================================================================
+   9. RESULT CARD
+   ========================================================================== */
+
+.result-card {
+    width: 100%;
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    border: 1px solid var(--slate-200);
+
+    box-shadow: var(--card-shadow);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+}
+
+.result-card-top {
+    border-left: 4px solid var(--agri-700);
+}
+
+.result-title-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 6px;
+}
+
+.result-title-row h4 {
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: var(--slate-900);
+}
+
+.result-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 16px;
+
+    font-size: 12px;
+
+    color: var(--slate-500);
+}
+
+
+/* ==========================================================================
+   10. EMPTY RESULTS
+   ========================================================================== */
+
+.empty-results {
+    background: white;
+
+    border: 2px dashed var(--slate-200);
+
+    border-radius: 18px;
+
+    padding: 60px 30px;
+
+    text-align: center;
+
+    color: var(--slate-500);
+}
+
+.empty-results i {
+    font-size: 42px;
+
+    color: var(--agri-700);
+
+    margin-bottom: 16px;
+}
+
+.empty-results h3 {
+    color: var(--slate-900);
+
+    font-size: 20px;
+
+    margin-bottom: 8px;
+}
+
+.empty-results p {
+    max-width: 500px;
+
+    margin: 0 auto;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* ==========================================================================
+   11. RESULTS NOTE
+   ========================================================================== */
+
+.results-note {
+    font-size: 12px;
+
+    color: var(--slate-500);
+
+    margin-top: 16px;
+
+    line-height: 1.5;
+}
+
+.results-note code {
+    background: var(--slate-100);
+
+    padding: 2px 6px;
+
+    border-radius: 4px;
+}
+
+
+/* ==========================================================================
+   12. CROP BADGES
+   ========================================================================== */
+
+.badge-green {
+    background: var(--agri-100);
+
+    color: var(--agri-800);
+
+    font-size: 12px;
+
+    padding: 4px 12px;
+}
+
+.badge-green-solid {
+    background: var(--agri-700);
+
+    color: white;
+}
+
+.badge-gray {
+    background: var(--slate-100);
+
+    color: var(--slate-700);
+}
+
+
+/* ==========================================================================
+   13. CROP BUTTONS
+   ========================================================================== */
+
+.btn-light {
+    background-color: var(--slate-100);
+
+    color: var(--slate-700);
+
+    font-size: 12px;
+
+    padding: 10px 16px;
+}
+
+.btn-light:hover {
+    background-color: var(--slate-200);
+}
