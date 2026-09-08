@@ -34,7 +34,7 @@
             <div class="brand">
 
                 <div class="brand-icon">
-                    <i class="fa-solid fa-leaf"></i>
+                    <img src="images/sprout.png" alt="AniWise Logo">
                 </div>
 
                 <div>
@@ -85,154 +85,153 @@
         </div>
 
 
-        <main>
+    </header>
 
-            <section class="yield-section">
+    <main>
 
-                <div class="yield-container">
+        <section class="yield-section">
 
-                    <div class="yield-card">
+            <div class="yield-container">
 
-                        <!-- Heading -->
-                        <div class="yield-heading">
+                <div class="yield-card">
 
-                            <h1>
-                                <i class="fa-solid fa-chart-line"></i>
-                                Crop Yield <span class="section-heading-accent">Prediction</span>
-                            </h1>
+                    <!-- Heading -->
+                    <div class="yield-heading">
 
-                            <p>
-                                Enter your farm conditions to get accurate yield predictions.
-                            </p>
+                        <h1>
+                            <i class="fa-solid fa-chart-line"></i>
+                            Crop Yield <span class="section-heading-accent">Prediction</span>
+                        </h1>
 
-                        </div>
+                        <p>
+                            Enter your farm conditions to get accurate yield predictions.
+                        </p>
 
-
-                        <!-- Form -->
-                        <form id="yield-form">
-
-                            <div class="yield-form-grid">
+                    </div>
 
 
-                                <!-- Target Crop -->
-                                <div class="yield-field">
+                    <!-- Form -->
+                    <form id="yield-form">
 
-                                    <label for="target-crop">
-                                        Target Crop
-                                    </label>
-
-                                    <select id="target-crop" required>
-
-                                        <option value="">
-                                            Select a crop
-                                        </option>
-
-                                        <option value="rice">
-                                            Rice
-                                        </option>
-
-                                        <option value="maize">
-                                            Maize
-                                        </option>
-
-                                        <option value="potatoes">
-                                            Potatoes
-                                        </option>
-
-                                        <option value="wheat">
-                                            Wheat
-                                        </option>
-
-                                        <option value="tomato">
-                                            Tomato
-                                        </option>
-
-                                    </select>
-
-                                </div>
+                        <div class="yield-form-grid">
 
 
-                                <!-- Annual Rainfall -->
-                                <div class="yield-field">
+                            <!-- Target Crop -->
+                            <div class="yield-field">
 
-                                    <label for="annual-rainfall">
-                                        Annual Rainfall (mm)
-                                    </label>
+                                <label for="target-crop">
+                                    Target Crop
+                                </label>
 
-                                    <input type="number" id="annual-rainfall" placeholder="e.g., 800" step="0.1"
-                                        required>
+                                <select id="target-crop" required>
 
-                                </div>
+                                    <option value="">
+                                        Select a crop
+                                    </option>
 
+                                    <option value="rice">
+                                        Rice
+                                    </option>
 
-                                <!-- Pesticide Use -->
-                                <div class="yield-field">
+                                    <option value="maize">
+                                        Maize
+                                    </option>
 
-                                    <label for="pesticide-use">
-                                        Pesticide Use (tonnes)
-                                    </label>
+                                    <option value="potatoes">
+                                        Potatoes
+                                    </option>
 
-                                    <input type="number" id="pesticide-use" placeholder="e.g., 150" step="0.1" required>
+                                    <option value="wheat">
+                                        Wheat
+                                    </option>
 
-                                </div>
+                                    <option value="tomato">
+                                        Tomato
+                                    </option>
 
-
-                                <!-- Average Temperature -->
-                                <div class="yield-field">
-
-                                    <label for="average-temperature">
-                                        Average Temperature (°C)
-                                    </label>
-
-                                    <input type="number" id="average-temperature" placeholder="e.g., 25" step="0.1"
-                                        required>
-
-                                </div>
+                                </select>
 
                             </div>
 
 
-                            <!-- Predict Button -->
-                            <button type="submit" class="btn btn-primary yield-predict-btn">
+                            <!-- Annual Rainfall -->
+                            <div class="yield-field">
 
-                                <i class="fa-solid fa-calculator"></i>
+                                <label for="annual-rainfall">
+                                    Annual Rainfall (mm)
+                                </label>
 
-                                Run Yield Prediction
+                                <input type="number" id="annual-rainfall" placeholder="e.g., 800" step="0.1" required>
 
-                            </button>
+                            </div>
 
-                        </form>
 
-                    </div>
+                            <!-- Pesticide Use -->
+                            <div class="yield-field">
+
+                                <label for="pesticide-use">
+                                    Pesticide Use (tonnes)
+                                </label>
+
+                                <input type="number" id="pesticide-use" placeholder="e.g., 150" step="0.1" required>
+
+                            </div>
+
+
+                            <!-- Average Temperature -->
+                            <div class="yield-field">
+
+                                <label for="average-temperature">
+                                    Average Temperature (°C)
+                                </label>
+
+                                <input type="number" id="average-temperature" placeholder="e.g., 25" step="0.1"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Predict Button -->
+                        <button type="submit" class="btn btn-primary yield-predict-btn">
+
+                            <i class="fa-solid fa-calculator"></i>
+
+                            Run Yield Prediction
+
+                        </button>
+
+                    </form>
 
                 </div>
 
-            </section>
+            </div>
+
+        </section>
 
 
-            <!-- Prediction Result -->
-            <section class="yield-results" id="yield-results">
+        <!-- Prediction Result -->
+        <section class="yield-results" id="yield-results">
 
-                <div class="yield-result-card">
+            <div class="yield-result-card">
 
-                    <i class="fa-solid fa-chart-column"></i>
+                <i class="fa-solid fa-chart-column"></i>
 
-                    <h2>
-                        No prediction yet
-                    </h2>
+                <h2>
+                    No prediction yet
+                </h2>
 
-                    <p>
-                        Enter your farm conditions above and click
-                        <strong>Predict Yield</strong> to see the predicted crop yield.
-                    </p>
+                <p>
+                    Enter your farm conditions above and click
+                    <strong>Predict Yield</strong> to see the predicted crop yield.
+                </p>
 
-                </div>
+            </div>
 
-            </section>
+        </section>
 
-        </main>
-
-    </header>
+    </main>
 
 </body>
 

@@ -20,8 +20,8 @@ html {
 
 body {
     font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-    color: #1e293b;
-    background-color: #f8fafc;
+    color: var(--color-jet-black);
+    background-color: var(--color-surface-muted);
     line-height: 1.5;
 }
 
@@ -38,29 +38,26 @@ button {
    ========================================================================== */
 
 :root {
-    --agri-50: #f0fdf4;
-    --agri-100: #dcfce7;
-    --agri-200: #bbf7d0;
-    --agri-600: #16a34a;
-    --agri-700: #2e7d32;
-    --agri-800: #1b5e20;
-    --agri-900: #0f3913;
+    /* Brand palette */
+    --color-jet-black: #0a2e36;
+    --color-primary: #036d19;
+    --color-secondary: #14cc60;
+    --color-gradient: #09a129;
+    --color-highlight: #27fb6b;
 
-    --slate-100: #f1f5f9;
-    --slate-200: #e2e8f0;
-    --slate-500: #64748b;
-    --slate-600: #475569;
-    --slate-700: #334155;
-    --slate-900: #0f172a;
-
-    --amber-100: #fef3c7;
-    --amber-800: #92400e;
-
-    --blue-100: #dbeafe;
-    --blue-800: #1e40af;
+    /* Palette-derived surfaces and readable text tones */
+    --color-surface: #ffffff;
+    --color-surface-soft: #effcf3;
+    --color-surface-muted: #f3f8f7;
+    --color-primary-soft: #d6f8e2;
+    --color-primary-muted: #a7edc0;
+    --color-border: #dce8e4;
+    --color-text-muted: #63787a;
+    --color-text-secondary: #405b60;
+    --color-text-strong: #25464d;
 
     --card-shadow:
-        0 4px 20px -2px rgba(46, 125, 50, 0.08),
+        0 4px 20px -2px rgba(3, 109, 25, 0.08),
         0 2px 6px -1px rgba(0, 0, 0, 0.04);
 }
 
@@ -86,10 +83,10 @@ button {
     top: 0;
     z-index: 50;
 
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--color-primary);
     backdrop-filter: blur(6px);
 
-    border-bottom: 1px solid var(--slate-200);
+    border-bottom: 1px solid rgba(20, 204, 96, 0.28);
 }
 
 .header-inner {
@@ -108,30 +105,29 @@ button {
     cursor: pointer;
 }
 
-.brand-icon {
-    width: 51px;
-    height: 51px;
-
-    border-radius: 12px;
-
-    background: var(--agri-700);
-    color: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 20px;
+.brand-static {
+    cursor: default;
 }
+
+
+
+.brand-icon img {
+    width: 40px;
+    /* adjust size as needed */
+    height: 40px;
+    margin-top: 12px;
+}
+
 
 .brand-name {
     font-size: 25px;
     font-weight: 775;
-    color: var(--agri-900);
+    color: white;
 }
 
+
 .brand-accent {
-    color: var(--agri-700);
+    color: var(--color-secondary);
 }
 
 .brand-tagline {
@@ -141,7 +137,7 @@ button {
     text-transform: uppercase;
     font-weight: 700;
 
-    color: var(--agri-600);
+    color: var(--color-primary-muted);
 
     letter-spacing: 0.07em;
 }
@@ -166,7 +162,7 @@ button {
     white-space: nowrap;
     text-decoration: none;
 
-    color: var(--slate-600);
+    color: var(--color-primary-soft);
 
     font-size: 13px;
     font-weight: 600;
@@ -177,11 +173,11 @@ button {
 }
 
 .nav-btn:hover {
-    color: var(--agri-700);
+    color: white;
 
-    background-color: var(--agri-100);
+    background-color: rgba(20, 204, 96, 0.18);
 
-    border-color: rgba(22, 101, 52, 0.08);
+    border-color: rgba(39, 251, 107, 0.28);
 
     transform: translateY(-1px);
 }
@@ -192,8 +188,8 @@ button {
 }
 
 .nav-btn-active {
-    color: var(--agri-800);
-    background-color: var(--agri-50);
+    color: white;
+    background-color: rgba(20, 204, 96, 0.24);
 }
 
 
@@ -219,23 +215,24 @@ button {
 }
 
 .btn-primary {
-    background-color: var(--agri-700);
+    background-color: var(--color-primary);
     color: white;
 }
 
 .btn-primary:hover {
-    background-color: var(--agri-800);
+    background-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(39, 251, 107, 0.18);
 }
 
 .btn-white {
     background-color: white;
-    color: var(--agri-900);
+    color: var(--color-jet-black);
 
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .btn-white:hover {
-    background-color: var(--agri-50);
+    background-color: var(--color-surface-soft);
 }
 
 .btn-outline {
@@ -264,9 +261,9 @@ button {
     position: relative;
 
     background: linear-gradient(135deg,
-            var(--agri-900) 0%,
-            var(--agri-800) 50%,
-            var(--agri-700) 100%);
+            var(--color-jet-black) 0%,
+            var(--color-primary) 50%,
+            var(--color-gradient) 100%);
 
     color: white;
 
@@ -297,7 +294,7 @@ button {
     width: 300px;
     height: 300px;
 
-    background: rgba(187, 247, 208, 0.15);
+    background: rgba(20, 204, 96, 0.16);
 
     bottom: -100px;
     left: 10%;
@@ -332,7 +329,7 @@ button {
     font-size: 12px;
     font-weight: 600;
 
-    color: var(--agri-200);
+    color: var(--color-primary-muted);
 
     margin-bottom: 20px;
 }
@@ -347,14 +344,14 @@ button {
 }
 
 .hero-title-accent {
-    color: var(--agri-200);
+    color: var(--color-primary-muted);
 }
 
 .hero-subtitle {
     font-size: 20px;
     font-weight: 300;
 
-    color: #e2e8f0;
+    color: var(--color-primary-soft);
 
     max-width: 600px;
 
@@ -413,7 +410,7 @@ button {
 
     font-size: 22px;
 
-    color: var(--agri-200);
+    color: var(--color-primary-muted);
 
     margin: 0 auto 12px;
 }
@@ -426,7 +423,7 @@ button {
 .stat-label {
     font-size: 12px;
 
-    color: #cbd5e1;
+    color: var(--color-primary-muted);
 
     margin-top: 4px;
 }
@@ -452,17 +449,17 @@ button {
     font-size: 30px;
     font-weight: 800;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 }
 
 .section-heading p {
     margin-top: 12px;
 
-    color: var(--slate-600);
+    color: var(--color-text-secondary);
 }
 
 .section-heading-accent {
-    color: var(--agri-700);
+    color: var(--color-primary);
 }
 
 .features-grid {
@@ -486,7 +483,7 @@ button {
 
     border-radius: 16px;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
 
     box-shadow: var(--card-shadow);
 
@@ -503,9 +500,9 @@ button {
     width: 56px;
     height: 56px;
 
-    background: var(--agri-100);
+    background: var(--color-primary-soft);
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     border-radius: 16px;
 
@@ -522,7 +519,7 @@ button {
     font-size: 20px;
     font-weight: 700;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
     margin-bottom: 8px;
 }
@@ -543,7 +540,7 @@ button {
 .feature-card p {
     font-size: 14px;
 
-    color: var(--slate-600);
+    color: var(--color-text-secondary);
 
     line-height: 1.6;
 
@@ -554,7 +551,7 @@ button {
     font-size: 12px;
     font-weight: 700;
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     display: inline-flex;
     align-items: center;
@@ -584,14 +581,14 @@ button {
     border-radius: 999px;
 }
 
-.badge-amber {
-    background: var(--amber-100);
-    color: var(--amber-800);
+.badge-secondary {
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
 }
 
-.badge-blue {
-    background: var(--blue-100);
-    color: var(--blue-800);
+.badge-muted {
+    background: var(--color-surface-soft);
+    color: var(--color-primary);
 }
 
 
@@ -617,13 +614,13 @@ button {
     font-size: 30px;
     font-weight: 800;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 }
 
 .about .section-header p {
     margin-top: 12px;
 
-    color: var(--slate-600);
+    color: var(--color-text-secondary);
 }
 
 .steps-container {
@@ -652,7 +649,7 @@ button {
     width: 34px;
     height: 34px;
 
-    background: var(--agri-700);
+    background: var(--color-primary);
 
     color: white;
 
@@ -673,10 +670,10 @@ button {
     height: 150px;
 
     background: linear-gradient(135deg,
-            var(--agri-600) 0%,
-            var(--agri-900) 100%);
+            var(--color-primary) 0%,
+            var(--color-gradient) 100%);
 
-    box-shadow: 0 8px 20px rgba(69, 26, 3, 0.25);
+    box-shadow: 0 8px 20px rgba(3, 109, 25, 0.25);
 
     border-radius: 50%;
 
@@ -699,7 +696,7 @@ button {
     font-size: 18px;
     font-weight: 700;
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     margin-bottom: 10px;
 }
@@ -707,7 +704,7 @@ button {
 .step-description {
     font-size: 14px;
 
-    color: var(--slate-600);
+    color: var(--color-text-secondary);
 
     line-height: 1.6;
 
@@ -720,8 +717,8 @@ button {
    ========================================================================== */
 
 .site-footer {
-    background: var(--agri-900);
-
+    background: var(--color-primary);
+    backdrop-filter: blur(6px);
     color: white;
 
     padding: 56px 0 0;
@@ -750,7 +747,7 @@ button {
     width: 40px;
     height: 40px;
 
-    background: var(--agri-700);
+    background: var(--color-primary);
 
     border-radius: 12px;
 
@@ -771,7 +768,7 @@ button {
 }
 
 .footer-brand-accent {
-    color: var(--agri-200);
+    color: var(--color-primary-muted);
 }
 
 .footer-tagline {
@@ -789,7 +786,7 @@ button {
 
     letter-spacing: 0.05em;
 
-    color: var(--agri-200);
+    color: var(--color-primary-muted);
 
     margin-bottom: 16px;
 }

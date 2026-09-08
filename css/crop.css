@@ -8,7 +8,9 @@
    ========================================================================== */
 
 .page-section {
-    padding: 24px 20px;
+    min-height: calc(100vh - 75px);
+    padding: 56px 20px 80px;
+    background: linear-gradient(180deg, var(--color-surface-muted), var(--color-surface-soft));
 
     scroll-margin-top: 84px;
 }
@@ -25,13 +27,13 @@
     font-size: 30px;
     font-weight: 800;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
     margin-bottom: 6px;
 }
 
 .page-heading p {
-    color: var(--slate-600);
+    color: var(--color-text-secondary);
 }
 
 
@@ -61,7 +63,7 @@
 
     border-radius: 18px;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
 
     box-shadow: var(--card-shadow);
 
@@ -75,7 +77,7 @@
 
     border-radius: 16px;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
 
     box-shadow: var(--card-shadow);
 }
@@ -93,7 +95,7 @@
 
     letter-spacing: 0.04em;
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     margin-bottom: 12px;
 }
@@ -103,7 +105,7 @@
 }
 
 .form-section-note {
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 
     text-transform: none;
 
@@ -153,7 +155,7 @@
 
     letter-spacing: 0.03em;
 
-    color: var(--slate-700);
+    color: var(--color-text-strong);
 
     margin-bottom: 6px;
 }
@@ -164,11 +166,11 @@
 
     border-radius: 12px;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
 
     font-size: 14px;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
     outline: none;
 
@@ -179,15 +181,15 @@
 
 .form-field input:focus,
 .form-field select:focus {
-    border-color: var(--agri-700);
+    border-color: var(--color-primary);
 
-    box-shadow: 0 0 0 3px var(--agri-100);
+    box-shadow: 0 0 0 3px var(--color-primary-soft);
 }
 
 .form-hint {
     font-size: 11px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 
     line-height: 1.5;
 
@@ -234,7 +236,7 @@
 
     letter-spacing: 0.08em;
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     margin-bottom: 6px;
 }
@@ -244,7 +246,7 @@
 
     font-weight: 800;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
     margin-bottom: 6px;
 }
@@ -252,7 +254,7 @@
 .results-heading p {
     font-size: 14px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 }
 
 
@@ -288,7 +290,7 @@
 
     border-radius: 16px;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
 
     box-shadow: var(--card-shadow);
 
@@ -302,7 +304,7 @@
 }
 
 .result-card-top {
-    border-left: 4px solid var(--agri-700);
+    border-left: 4px solid var(--color-primary);
 }
 
 .result-title-row {
@@ -320,7 +322,7 @@
 
     font-weight: 700;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 }
 
 .result-meta {
@@ -332,7 +334,7 @@
 
     font-size: 12px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 }
 
 
@@ -343,7 +345,7 @@
 .empty-results {
     background: white;
 
-    border: 2px dashed var(--slate-200);
+    border: 2px dashed var(--color-border);
 
     border-radius: 18px;
 
@@ -351,19 +353,19 @@
 
     text-align: center;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 }
 
 .empty-results i {
     font-size: 42px;
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     margin-bottom: 16px;
 }
 
 .empty-results h3 {
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
     font-size: 20px;
 
@@ -388,7 +390,7 @@
 .results-note {
     font-size: 12px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 
     margin-top: 16px;
 
@@ -396,7 +398,7 @@
 }
 
 .results-note code {
-    background: var(--slate-100);
+    background: var(--color-surface-muted);
 
     padding: 2px 6px;
 
@@ -408,26 +410,26 @@
    12. CROP BADGES
    ========================================================================== */
 
-.badge-green {
-    background: var(--agri-100);
+.badge-primary {
+    background: var(--color-primary-soft);
 
-    color: var(--agri-800);
+    color: var(--color-primary);
 
     font-size: 12px;
 
     padding: 4px 12px;
 }
 
-.badge-green-solid {
-    background: var(--agri-700);
+.badge-primary-solid {
+    background: var(--color-primary);
 
     color: white;
 }
 
-.badge-gray {
-    background: var(--slate-100);
+.badge-neutral {
+    background: var(--color-surface-muted);
 
-    color: var(--slate-700);
+    color: var(--color-text-strong);
 }
 
 
@@ -436,9 +438,9 @@
    ========================================================================== */
 
 .btn-light {
-    background-color: var(--slate-100);
+    background-color: var(--color-surface-muted);
 
-    color: var(--slate-700);
+    color: var(--color-text-strong);
 
     font-size: 12px;
 
@@ -446,7 +448,7 @@
 }
 
 .btn-light:hover {
-    background-color: var(--slate-200);
+    background-color: var(--color-border);
 }
 
 
@@ -460,7 +462,7 @@
    ========================================================================== */
 
 .page-section {
-    padding: 24px 20px;
+    padding: 56px 20px 80px;
 
     scroll-margin-top: 84px;
 }
@@ -477,13 +479,13 @@
     font-size: 30px;
     font-weight: 800;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
     margin-bottom: 6px;
 }
 
 .page-heading p {
-    color: var(--slate-600);
+    color: var(--color-text-secondary);
 }
 
 
@@ -513,7 +515,7 @@
 
     border-radius: 18px;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
 
     box-shadow: var(--card-shadow);
 
@@ -527,7 +529,7 @@
 
     border-radius: 16px;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
 
     box-shadow: var(--card-shadow);
 }
@@ -545,7 +547,7 @@
 
     letter-spacing: 0.04em;
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     margin-bottom: 12px;
 }
@@ -555,7 +557,7 @@
 }
 
 .form-section-note {
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 
     text-transform: none;
 
@@ -605,7 +607,7 @@
 
     letter-spacing: 0.03em;
 
-    color: var(--slate-700);
+    color: var(--color-text-strong);
 
     margin-bottom: 6px;
 }
@@ -616,11 +618,11 @@
 
     border-radius: 12px;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
 
     font-size: 14px;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
     outline: none;
 
@@ -631,15 +633,15 @@
 
 .form-field input:focus,
 .form-field select:focus {
-    border-color: var(--agri-700);
+    border-color: var(--color-primary);
 
-    box-shadow: 0 0 0 3px var(--agri-100);
+    box-shadow: 0 0 0 3px var(--color-primary-soft);
 }
 
 .form-hint {
     font-size: 11px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 
     line-height: 1.5;
 
@@ -686,7 +688,7 @@
 
     letter-spacing: 0.08em;
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     margin-bottom: 6px;
 }
@@ -696,7 +698,7 @@
 
     font-weight: 800;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
     margin-bottom: 6px;
 }
@@ -704,7 +706,7 @@
 .results-heading p {
     font-size: 14px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 }
 
 
@@ -740,7 +742,7 @@
 
     border-radius: 16px;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
 
     box-shadow: var(--card-shadow);
 
@@ -754,7 +756,7 @@
 }
 
 .result-card-top {
-    border-left: 4px solid var(--agri-700);
+    border-left: 4px solid var(--color-primary);
 }
 
 .result-title-row {
@@ -772,7 +774,7 @@
 
     font-weight: 700;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 }
 
 .result-meta {
@@ -784,7 +786,7 @@
 
     font-size: 12px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 }
 
 
@@ -795,7 +797,7 @@
 .empty-results {
     background: white;
 
-    border: 2px dashed var(--slate-200);
+    border: 2px dashed var(--color-border);
 
     border-radius: 18px;
 
@@ -803,19 +805,19 @@
 
     text-align: center;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 }
 
 .empty-results i {
     font-size: 42px;
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     margin-bottom: 16px;
 }
 
 .empty-results h3 {
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
     font-size: 20px;
 
@@ -840,7 +842,7 @@
 .results-note {
     font-size: 12px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 
     margin-top: 16px;
 
@@ -848,7 +850,7 @@
 }
 
 .results-note code {
-    background: var(--slate-100);
+    background: var(--color-surface-muted);
 
     padding: 2px 6px;
 
@@ -860,26 +862,26 @@
    12. CROP BADGES
    ========================================================================== */
 
-.badge-green {
-    background: var(--agri-100);
+.badge-primary {
+    background: var(--color-primary-soft);
 
-    color: var(--agri-800);
+    color: var(--color-primary);
 
     font-size: 12px;
 
     padding: 4px 12px;
 }
 
-.badge-green-solid {
-    background: var(--agri-700);
+.badge-primary-solid {
+    background: var(--color-primary);
 
     color: white;
 }
 
-.badge-gray {
-    background: var(--slate-100);
+.badge-neutral {
+    background: var(--color-surface-muted);
 
-    color: var(--slate-700);
+    color: var(--color-text-strong);
 }
 
 
@@ -888,9 +890,9 @@
    ========================================================================== */
 
 .btn-light {
-    background-color: var(--slate-100);
+    background-color: var(--color-surface-muted);
 
-    color: var(--slate-700);
+    color: var(--color-text-strong);
 
     font-size: 12px;
 
@@ -898,5 +900,5 @@
 }
 
 .btn-light:hover {
-    background-color: var(--slate-200);
+    background-color: var(--color-border);
 }

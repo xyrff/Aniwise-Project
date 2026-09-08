@@ -11,7 +11,7 @@
 
 .weather-page {
     padding: 70px 0 100px;
-    background-color: #f8fafc;
+    background-color: var(--color-surface-muted);
     min-height: calc(100vh - 75px);
 }
 
@@ -35,9 +35,9 @@
     font-weight: 800;
     letter-spacing: 0.08em;
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
-    background: var(--agri-100);
+    background: var(--color-primary-soft);
     padding: 6px 12px;
     border-radius: 999px;
 
@@ -49,18 +49,18 @@
     font-weight: 800;
     line-height: 1.15;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
     margin-bottom: 12px;
 }
 
 .weather-heading h1 span {
-    color: var(--agri-700);
+    color: var(--color-primary);
 }
 
 .weather-heading p {
     font-size: 15px;
-    color: var(--slate-600);
+    color: var(--color-text-secondary);
     line-height: 1.6;
 }
 
@@ -88,7 +88,7 @@
 
     background: white;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
     border-radius: 12px;
 
     padding: 0 14px;
@@ -97,7 +97,7 @@
 }
 
 .search-input i {
-    color: var(--agri-700);
+    color: var(--color-primary);
     font-size: 15px;
 }
 
@@ -113,11 +113,11 @@
 
     font-family: inherit;
     font-size: 14px;
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 }
 
 .search-input input::placeholder {
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 }
 
 
@@ -149,7 +149,7 @@
 
     background: white;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
 
     border-radius: 14px;
 
@@ -189,7 +189,7 @@
 
     border: none;
 
-    border-bottom: 1px solid var(--slate-100);
+    border-bottom: 1px solid var(--color-surface-muted);
 
     text-align: left;
 
@@ -211,7 +211,7 @@
 
 .location-suggestion:hover {
 
-    background-color: var(--agri-50);
+    background-color: var(--color-surface-soft);
 
 }
 
@@ -220,13 +220,13 @@
 --------------------------------------------------------- */
 
 .location-detected {
-    background-color: var(--agri-100);
-    color: var(--agri-800);
-    border-color: var(--agri-200);
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary);
+    border-color: var(--color-primary-muted);
 }
 
 .location-detected:hover {
-    background-color: var(--agri-200);
+    background-color: var(--color-primary-muted);
 }
 
 
@@ -240,9 +240,9 @@
 
     border-radius: 10px;
 
-    background: var(--agri-100);
+    background: var(--color-primary-soft);
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     display: flex;
 
@@ -274,7 +274,7 @@
 
     font-weight: 700;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
 }
 
@@ -285,7 +285,7 @@
 
     font-size: 11px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 
 }
 
@@ -300,7 +300,7 @@
 
     font-size: 13px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 
 }
 
@@ -321,7 +321,7 @@
 
     background: white;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
     border-radius: 12px;
 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
@@ -357,7 +357,7 @@
 }
 
 .location-suggestion:hover {
-    background: var(--agri-50);
+    background: var(--color-surface-soft);
 }
 
 .location-suggestion-icon {
@@ -370,8 +370,8 @@
     align-items: center;
     justify-content: center;
 
-    background: var(--agri-100);
-    color: var(--agri-700);
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
 
     border-radius: 50%;
 }
@@ -386,12 +386,12 @@
 .location-suggestion-name {
     font-size: 14px;
     font-weight: 700;
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 }
 
 .location-suggestion-details {
     font-size: 12px;
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 
     margin-top: 2px;
 
@@ -404,7 +404,7 @@
     padding: 14px 16px;
 
     font-size: 13px;
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 
     text-align: center;
 }
@@ -420,9 +420,9 @@
     margin: 0 auto;
 
     background: linear-gradient(135deg,
-            var(--agri-900) 0%,
-            var(--agri-800) 55%,
-            var(--agri-700) 100%);
+            var(--color-jet-black) 0%,
+            var(--color-primary) 55%,
+            var(--color-gradient) 100%);
 
     color: white;
 
@@ -431,7 +431,7 @@
     padding: 32px;
 
     box-shadow:
-        0 10px 30px rgba(15, 57, 19, 0.18);
+        0 10px 30px rgba(10, 46, 54, 0.22);
 
     position: relative;
     overflow: hidden;
@@ -567,7 +567,7 @@
 
     font-size: 18px;
 
-    color: var(--agri-200);
+    color: var(--color-primary-muted);
 }
 
 .weather-stat span {
@@ -605,7 +605,7 @@
 
     letter-spacing: 0.08em;
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     margin-bottom: 5px;
 }
@@ -614,7 +614,7 @@
     font-size: 26px;
     font-weight: 800;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 }
 
 
@@ -633,7 +633,7 @@
 .forecast-card {
     background: white;
 
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--color-border);
 
     border-radius: 16px;
 
@@ -651,13 +651,13 @@
 .forecast-card:hover {
     transform: translateY(-3px);
 
-    border-color: var(--agri-200);
+    border-color: var(--color-primary-muted);
 }
 
 .forecast-card.today {
-    border: 2px solid var(--agri-700);
+    border: 2px solid var(--color-primary);
 
-    background: var(--agri-50);
+    background: var(--color-surface-soft);
 }
 
 .forecast-day {
@@ -665,7 +665,7 @@
 
     font-weight: 800;
 
-    color: var(--slate-600);
+    color: var(--color-text-secondary);
 
     text-transform: uppercase;
 
@@ -695,23 +695,23 @@
 
     font-weight: 800;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 }
 
 .forecast-low {
     font-size: 13px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 }
 
 .forecast-rain {
     font-size: 10px;
 
-    color: var(--slate-500);
+    color: var(--color-text-muted);
 }
 
 .forecast-rain i {
-    color: var(--agri-600);
+    color: var(--color-secondary);
 
     margin-right: 3px;
 }
@@ -734,9 +734,9 @@
 
     background: white;
 
-    border: 1px solid var(--agri-200);
+    border: 1px solid var(--color-primary-muted);
 
-    border-left: 4px solid var(--agri-700);
+    border-left: 4px solid var(--color-primary);
 
     border-radius: 16px;
 
@@ -755,9 +755,9 @@
     align-items: center;
     justify-content: center;
 
-    background: var(--agri-100);
+    background: var(--color-primary-soft);
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     border-radius: 12px;
 
@@ -773,7 +773,7 @@
 
     letter-spacing: 0.08em;
 
-    color: var(--agri-700);
+    color: var(--color-primary);
 
     margin-bottom: 4px;
 }
@@ -783,7 +783,7 @@
 
     font-weight: 700;
 
-    color: var(--slate-900);
+    color: var(--color-jet-black);
 
     margin-bottom: 5px;
 }
@@ -791,7 +791,7 @@
 .farm-insight p {
     font-size: 13px;
 
-    color: var(--slate-600);
+    color: var(--color-text-secondary);
 
     line-height: 1.6;
 }
