@@ -4,48 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AniWise - About</title>
+    <title>AniWise — About</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/../css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/about.css">
+    <link rel="stylesheet" href="../css/main.css?v=20260910-1552">
+    <link rel="stylesheet" href="../css/about.css?v=20260910-1552">
 </head>
 
 <body>
     <header class="site-header">
         <div class="container header-inner">
-            <div class="brand brand-static">
-                <div class="brand-icon">
-                    <img src="../images/sprout.png" alt="AniWise Logo">
-                </div>
-                <div>
+            <a class="brand brand-static" href="index.html" aria-label="AniWise home">
+                <span class="brand-icon"><img src="../images/sprout.png" alt=""></span>
+                <span>
                     <span class="brand-name">Ani<span class="brand-accent">Wise</span></span>
                     <span class="brand-tagline">Smart Crop Recommendation</span>
-                </div>
-            </div>
+                </span>
+            </a>
 
             <nav class="nav-links" aria-label="Main navigation">
-                <a href="index.html" class="nav-btn"><img src="../images/homepage.png" alt=""> Home</a>
-                <a href="crop-recommendation.html" class="nav-btn"><img src="../images/growing-plant.png" alt=""> Crop
+                <a href="index.html" class="nav-btn"><img src="../images/homepage.png" alt="">Home</a>
+                <a href="crop-recommendation.html" class="nav-btn"><img src="../images/growing-plant.png" alt="">Crop
                     Recommendation</a>
-                <a href="yield.html" class="nav-btn"><img src="../images/prediction.png" alt=""> Yield Prediction</a>
-                <a href="weather.html" class="nav-btn"><img src="../images/cloudy.png" alt=""> Weather Forecast</a>
-                <a href="about.html" class="nav-btn nav-btn-active" aria-current="page"><img
-                        src="../images/info.png" alt=""> About</a>
+                <a href="yield.html" class="nav-btn"><img src="../images/prediction.png" alt="">Yield Prediction</a>
+                <a href="weather.html" class="nav-btn"><img src="../images/cloudy.png" alt="">Weather Forecast</a>
+                <a href="about.html" class="nav-btn nav-btn-active" aria-current="page"><img src="../images/info.png"
+                        alt="">About</a>
             </nav>
         </div>
     </header>
 
     <main class="about-page">
-        <section class="about-hero-band">
+        <section class="about-hero-band" aria-labelledby="about-heading">
             <div class="container about-container">
                 <header class="about-heading">
-                    <h1>Supporting smarter <span>agriculture</span></h1>
+                    <h1 id="about-heading">Supporting Smarter Agriculture</h1>
                     <p>AniWise is a smart agriculture support system designed to help users explore data-informed crop
                         decisions. It combines machine learning-powered recommendations and yield estimates with current
                         weather information, making essential agricultural insights easier to access in one place.</p>
@@ -53,57 +50,55 @@
             </div>
         </section>
 
-
         <section class="about-content-band">
             <div class="container about-container">
                 <section class="technology-section" aria-labelledby="technology-heading">
                     <div class="technology-copy">
+                        <p class="section-eyebrow">How the product is built</p>
                         <h2 id="technology-heading">Our Technology</h2>
-                        <p>AniWise combines data-driven machine learning models with weather API integration to turn
-                            agricultural inputs into clear, practical insights for crop planning and decision-making.
-                        </p>
+                        <p>AniWise combines a crop recommendation form, a prototype yield workflow, and a live
+                            Open-Meteo forecast so users can see what is connected before they make a decision.</p>
                         <ul class="technology-tags" aria-label="Technology highlights">
-                            <li>Machine Learning Models</li>
-                            <li>Weather API Integration</li>
-                            <li>Data-Driven Insights</li>
-                            <li>JavaScript Web Interface</li>
+                            <li>Machine learning workflow</li>
+                            <li>Weather API integration</li>
+                            <li>Data-informed decisions</li>
+                            <li>JavaScript web interface</li>
                         </ul>
                     </div>
 
-                    <aside class="model-stats-card" aria-label="AI model statistics placeholders">
-                        <p class="stats-label"><i class="fa-solid fa-wand-magic-sparkles"></i> OUR AI MODELS</p>
-                        <div class="stats-grid">
-                            <div class="stat-item"><strong>--%</strong><span>Model accuracy</span></div>
-                            <div class="stat-item"><strong>--K</strong><span>Data points</span></div>
-                            <div class="stat-item"><strong>--</strong><span>Crop varieties</span></div>
-                            <div class="stat-item"><strong>--</strong><span>Years of data</span></div>
-                        </div>
-                    </aside>
                 </section>
 
                 <section class="features-section" aria-labelledby="features-heading">
-                    <h2 id="features-heading">Machine Learning Models &amp; Features Used</h2>
+                    <p class="section-eyebrow">What each tool does</p>
+                    <h2 id="features-heading">Models and features used</h2>
 
                     <div class="feature-grid">
                         <article class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-seedling"></i></div>
-                            <h3>Crop Recommendation System</h3>
-                            <p>This machine learning model analyzes relevant soil and environmental inputs to recommend
-                                crop options that may be suitable for the given conditions.</p>
+                            <div class="feature-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
+                            <div>
+                                <h3>Crop Recommendation System</h3>
+                                <p>Collects soil and environmental inputs so a connected model can rank crop options for
+                                    the given conditions.</p>
+                            </div>
                         </article>
 
                         <article class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
-                            <h3>Yield Prediction System</h3>
-                            <p>This machine learning model estimates potential crop yield from available agricultural
-                                inputs, helping users plan and evaluate expected production.</p>
+                            <div class="feature-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+                            <div>
+                                <h3>Yield Prediction System</h3>
+                                <p>Provides the input workflow for a future yield estimate. The prediction service is
+                                    clearly marked as pending.</p>
+                            </div>
                         </article>
 
                         <article class="feature-item feature-item-api">
-                            <div class="feature-icon"><i class="fa-solid fa-cloud-sun-rain"></i></div>
-                            <h3>Weather Forecast</h3>
-                            <p><strong>Not a machine learning model.</strong> This feature uses a weather API
-                                integration to provide current weather data and forecasts for the selected location.</p>
+                            <div class="feature-icon"><i class="fa-solid fa-cloud-sun-rain" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3>Weather Forecast</h3>
+                                <p>Uses a weather API to show current conditions, a 7-day forecast, and a practical
+                                    insight for the selected location.</p>
+                            </div>
                         </article>
                     </div>
                 </section>

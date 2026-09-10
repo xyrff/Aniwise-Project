@@ -4,320 +4,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniWise — Weather Forecast</title>
 
-    <title>AniWise - Weather Forecast</title>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/../css/all.min.css">
-
-    <!-- Google Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="../css/main.css">
-
-    <!-- Weather-specific CSS -->
-    <link rel="stylesheet" href="../css/weather.css">
+    <link rel="stylesheet" href="../css/main.css?v=20260910-1552">
+    <link rel="stylesheet" href="../css/weather.css?v=20260910-1552">
 </head>
 
 <body>
-
-    <!-- ==========================================
-         HEADER
-    =========================================== -->
-
     <header class="site-header">
-
         <div class="container header-inner">
+            <a class="brand" href="index.html" aria-label="AniWise home">
+                <span class="brand-icon"><img src="../images/sprout.png" alt=""></span>
+                <span>
+                    <span class="brand-name">Ani<span class="brand-accent">Wise</span></span>
+                    <span class="brand-tagline">Smart Crop Recommendation</span>
+                </span>
+            </a>
 
-            <div class="brand brand-static">
-
-                <div class="brand-icon">
-                    <img src="../images/sprout.png" alt="AniWise Logo">
-                </div>
-
-                <div>
-                    <span class="brand-name">
-                        Ani<span class="brand-accent">Wise</span>
-                    </span>
-
-                    <span class="brand-tagline">
-                        Smart Crop Recommendation
-                    </span>
-                </div>
-
-            </div>
-
-
-            <nav class="nav-links">
-
-                <a href="index.html" class="nav-btn">
-                    <img src="../images/homepage.png" alt="">
-                    Home
-                </a>
-
-                <a href="crop-recommendation.html" class="nav-btn">
-                    <img src="../images/growing-plant.png" alt="">
-                    Crop Recommendation
-                </a>
-
-                <a href="yield.html" class="nav-btn">
-                    <img src="../images/prediction.png" alt="">
-                    Yield Prediction
-                </a>
-
-                <a href="weather.html" class="nav-btn nav-btn-active">
-                    <img src="../images/cloudy.png" alt="">
-                    Weather Forecast
-                </a>
-
-                <a href="about.html" class="nav-btn">
-                    <img src="../images/info.png" alt="">
-                    About
-                </a>
-
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="index.html" class="nav-btn"><img src="../images/homepage.png" alt="">Home</a>
+                <a href="crop-recommendation.html" class="nav-btn"><img src="../images/growing-plant.png" alt="">Crop
+                    Recommendation</a>
+                <a href="yield.html" class="nav-btn"><img src="../images/prediction.png" alt="">Yield Prediction</a>
+                <a href="weather.html" class="nav-btn nav-btn-active" aria-current="page"><img
+                        src="../images/cloudy.png" alt="">Weather Forecast</a>
+                <a href="about.html" class="nav-btn"><img src="../images/info.png" alt="">About</a>
             </nav>
-
         </div>
-
     </header>
 
-
-    <!-- ==========================================
-         WEATHER PAGE
-    =========================================== -->
-
     <main>
-
-        <section class="weather-page">
-
+        <section class="weather-page" aria-labelledby="weather-heading">
             <div class="container">
-
-                <!-- Page heading -->
-
                 <div class="weather-heading">
 
-                    <span class="weather-label">
-                        <i class="fa-solid fa-cloud-sun"></i>
-                        LIVE WEATHER
-                    </span>
-
-                    <h1>
-                        Weather <span>Forecast</span>
-                    </h1>
-
-                    <p>
-                        Monitor current and upcoming weather conditions
-                        to make smarter farming decisions.
-                    </p>
-
+                    <h1 id="weather-heading">Weather <span>Forecast</span></h1>
+                    Monitor current and upcoming weather conditions
+                    to make smarter farming decisions.
                 </div>
 
-
-                <!-- Location Search -->
-
-                <div class="weather-search">
-
+                <form class="weather-search" id="weather-search-form" novalidate>
                     <div class="search-input-wrapper">
-
+                        <label for="location-input" class="search-label">Search a location</label>
                         <div class="search-input location-search-wrapper">
-
-                            <i class="fa-solid fa-location-dot"></i>
-
-                            <input type="text" id="location-input" placeholder="Search Philippine city or province"
-                                autocomplete="off">
-
-                            <div id="location-suggestions" class="location-suggestions"></div>
-
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <input type="text" id="location-input" placeholder="e.g., Manila or Cebu" autocomplete="off"
+                                aria-controls="location-suggestions" aria-autocomplete="list">
                         </div>
-
-                        <div id="location-suggestions" class="location-suggestions"></div>
-
+                        <div id="location-suggestions" class="location-suggestions" role="listbox" hidden></div>
                     </div>
 
-                    <button class="btn btn-primary" id="weather-search-btn">
+                    <button class="btn btn-primary" type="submit" id="weather-search-btn"><i
+                            class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Search forecast</button>
+                    <button class="btn btn-light" type="button" id="use-location-btn"><i
+                            class="fa-solid fa-location-crosshairs" aria-hidden="true"></i> Use my location</button>
+                </form>
 
-                        <i class="fa-solid fa-magnifying-glass"></i>
-
-                        Search
-
-                    </button>
-
-                    <button class="btn btn-light" id="use-location-btn">
-
-                        <i class="fa-solid fa-location-crosshairs"></i>
-
-                        Use My Location
-
-                    </button>
-
+                <p class="weather-status weather-status-info" id="weather-status" role="status" aria-live="polite">
+                    Search for a Philippine city or province to load current conditions.</p>
+                <div class="weather-error" id="weather-error" role="alert" hidden>
+                    <p id="weather-error-message"></p>
+                    <button class="btn btn-light" type="button" id="weather-retry-btn">Retry weather search</button>
                 </div>
 
+                <section class="current-weather is-idle" id="current-weather" aria-live="polite"
+                    aria-label="Current weather">
+                    <div class="current-weather-empty" id="current-weather-empty">
+                        <i class="fa-solid fa-cloud-sun" aria-hidden="true"></i>
+                        <h2 id="current-weather-empty-title">Choose a location</h2>
+                        <p id="current-weather-empty-text">Current conditions will appear here after a search.</p>
+                    </div>
 
-                <!-- Current Weather -->
-
-                <section class="current-weather">
-
-                    <div class="current-weather-main">
-
-                        <div>
-
-                            <span class="current-location" id="current-location">
-
-                                Your Location
-
-                            </span>
-
-                            <p class="current-date" id="current-date">
-
-                                Loading...
-
-                            </p>
-
-                        </div>
-
-
-                        <div class="temperature">
-
-                            <span id="current-temperature">
-                                --°
-                            </span>
-
+                    <div class="current-weather-content" id="current-weather-content" hidden>
+                        <div class="current-weather-main">
                             <div>
-
-                                <p id="current-condition">
-                                    Loading weather...
-                                </p>
-
-                                <span id="current-weather-icon">
-                                    ☀️
-                                </span>
-
+                                <h2 class="current-location" id="current-location">Your location</h2>
+                                <p class="current-date" id="current-date"></p>
                             </div>
 
+                            <div class="temperature">
+                                <span id="current-temperature"></span>
+                                <div>
+                                    <p id="current-condition"></p>
+                                    <span id="current-weather-icon" aria-hidden="true"></span>
+                                </div>
+                            </div>
                         </div>
 
+                        <div class="weather-stats">
+                            <div class="weather-stat">
+                                <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                                <span>Humidity</span>
+                                <strong id="current-humidity"></strong>
+                            </div>
+                            <div class="weather-stat">
+                                <i class="fa-solid fa-cloud-rain" aria-hidden="true"></i>
+                                <span>Rainfall</span>
+                                <strong id="current-rainfall"></strong>
+                            </div>
+                            <div class="weather-stat">
+                                <i class="fa-solid fa-wind" aria-hidden="true"></i>
+                                <span>Wind</span>
+                                <strong id="current-wind"></strong>
+                            </div>
+                        </div>
                     </div>
-
-
-                    <div class="weather-stats">
-
-                        <div class="weather-stat">
-
-                            <i class="fa-solid fa-droplet"></i>
-
-                            <span>Humidity</span>
-
-                            <strong id="current-humidity">
-                                --%
-                            </strong>
-
-                        </div>
-
-
-                        <div class="weather-stat">
-
-                            <i class="fa-solid fa-cloud-rain"></i>
-
-                            <span>Rainfall</span>
-
-                            <strong id="current-rainfall">
-                                -- mm
-                            </strong>
-
-                        </div>
-
-
-                        <div class="weather-stat">
-
-                            <i class="fa-solid fa-wind"></i>
-
-                            <span>Wind</span>
-
-                            <strong id="current-wind">
-                                -- km/h
-                            </strong>
-
-                        </div>
-
-                    </div>
-
                 </section>
 
-
-                <!-- 7 Day Forecast -->
-
-                <section class="forecast-section">
-
+                <section class="forecast-section" aria-labelledby="forecast-heading">
                     <div class="section-title">
-
-                        <div>
-
-                            <span>FORECAST</span>
-
-                            <h2>
-                                7-Day Weather Forecast
-                            </h2>
-
-                        </div>
-
+                        <p>Forecast</p>
+                        <h2 id="forecast-heading">7-Day Weather Forecast</h2>
                     </div>
-
-
                     <div class="forecast-grid" id="forecast-grid">
-
-                        <!-- Forecast cards will be generated here -->
-
+                        <p class="forecast-empty" id="forecast-empty">Choose a location to see the 7-day forecast.</p>
                     </div>
-
                 </section>
 
-
-                <!-- Agriculture Insight -->
-
-                <section class="farm-insight">
-
-                    <div class="farm-insight-icon">
-                        <img src="../images/insight.png" alt="Farm weather insight">
-
-                    </div>
-
+                <section class="farm-insight" aria-labelledby="farm-insight-heading">
+                    <div class="farm-insight-icon"><img src="../images/insight.png" alt=""></div>
                     <div>
-
-                        <span>
-                            FARM WEATHER INSIGHT
-                        </span>
-
-                        <h3 id="farm-insight-title">
-                            Weather information for your farm
-                        </h3>
-
-                        <p id="farm-insight-text">
-                            Weather insights will appear here
-                            after a forecast is loaded.
-                        </p>
-
+                        <p>Farm weather insight</p>
+                        <h2 id="farm-insight-heading">Weather information for your farm</h2>
+                        <p id="farm-insight-text">A practical suggestion will appear after a forecast is loaded.</p>
                     </div>
-
                 </section>
-
             </div>
-
         </section>
-
     </main>
 
-
-    <!-- ==========================================
-         JAVASCRIPT
-    =========================================== -->
-
-    <script src="../js/script.js"></script>
-
+    <script src="../js/script.js?v=20260910-1554"></script>
 </body>
 
 </html>

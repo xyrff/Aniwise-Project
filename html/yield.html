@@ -4,235 +4,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniWise — Yield Prediction</title>
 
-    <title>AniWise - Crop Yield Prediction</title>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/../css/all.min.css">
-
-    <!-- Google Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-
-    <!-- Shared CSS -->
-    <link rel="stylesheet" href="../css/main.css">
-
-    <!-- Yield Prediction CSS -->
-    <link rel="stylesheet" href="../css/yield.css">
+    <link rel="stylesheet" href="../css/main.css?v=20260910-1552">
+    <link rel="stylesheet" href="../css/yield.css?v=20260910-1552">
 </head>
 
 <body>
-
     <header class="site-header">
-
         <div class="container header-inner">
+            <a class="brand" href="index.html" aria-label="AniWise home">
+                <span class="brand-icon"><img src="../images/sprout.png" alt=""></span>
+                <span>
+                    <span class="brand-name">Ani<span class="brand-accent">Wise</span></span>
+                    <span class="brand-tagline">Smart Crop Recommendation</span>
+                </span>
+            </a>
 
-            <!-- Logo -->
-            <div class="brand">
-
-                <div class="brand-icon">
-                    <img src="../images/sprout.png" alt="AniWise Logo">
-                </div>
-
-                <div>
-                    <span class="brand-name">
-                        Ani<span class="brand-accent">Wise</span>
-                    </span>
-
-                    <span class="brand-tagline">
-                        Smart Crop Recommendation
-                    </span>
-                </div>
-
-            </div>
-
-
-            <!-- Navigation -->
-            <nav class="nav-links">
-
-                <a href="index.html" class="nav-btn">
-                    <img src="../images/homepage.png" alt="">
-                    Home
-                </a>
-
-                <a href="crop-recommendation.html" class="nav-btn">
-                    <img src="../images/growing-plant.png" alt="">
-                    Crop Recommendation
-                </a>
-
-                <a href="yield-prediction.html" class="nav-btn nav-btn-active">
-
-                    <img src="../images/prediction.png" alt="">
-                    Yield Prediction
-
-                </a>
-
-                <a href="weather.html" class="nav-btn">
-                    <img src="../images/cloudy.png" alt="">
-                    Weather Forecast
-                </a>
-
-                <a href="about.html" class="nav-btn">
-                    <img src="../images/info.png" alt="">
-                    About
-                </a>
-
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="index.html" class="nav-btn"><img src="../images/homepage.png" alt="">Home</a>
+                <a href="crop-recommendation.html" class="nav-btn"><img src="../images/growing-plant.png" alt="">Crop
+                    Recommendation</a>
+                <a href="yield.html" class="nav-btn nav-btn-active" aria-current="page"><img
+                        src="../images/prediction.png" alt="">Yield Prediction</a>
+                <a href="weather.html" class="nav-btn"><img src="../images/cloudy.png" alt="">Weather Forecast</a>
+                <a href="about.html" class="nav-btn"><img src="../images/info.png" alt="">About</a>
             </nav>
-
         </div>
-
-
     </header>
 
     <main>
-
-        <section class="yield-section">
-
+        <section class="yield-section" aria-labelledby="yield-heading">
             <div class="yield-container">
-
                 <div class="yield-card">
-
-                    <!-- Heading -->
                     <div class="yield-heading">
-
-                        <h1>
-                            <i class="fa-solid fa-chart-line"></i>
-                            Crop Yield <span class="section-heading-accent">Prediction</span>
+                        <h1 id="yield-heading"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Crop Yield
+                            <span class="section-heading-accent">Prediction</span>
                         </h1>
-
-                        <p>
-                            Enter your farm conditions to get accurate yield predictions.
-                        </p>
-
+                        <p>Enter farm conditions to prepare a future yield estimate.</p>
                     </div>
 
-
-                    <!-- Form -->
                     <form id="yield-form">
-
                         <div class="yield-form-grid">
-
-
-                            <!-- Target Crop -->
                             <div class="yield-field">
-
-                                <label for="target-crop">
-                                    Target Crop
-                                </label>
-
+                                <label for="target-crop">Target crop</label>
                                 <select id="target-crop" required>
-
-                                    <option value="">
-                                        Select a crop
-                                    </option>
-
-                                    <option value="rice">
-                                        Rice
-                                    </option>
-
-                                    <option value="maize">
-                                        Maize
-                                    </option>
-
-                                    <option value="potatoes">
-                                        Potatoes
-                                    </option>
-
-                                    <option value="wheat">
-                                        Wheat
-                                    </option>
-
-                                    <option value="tomato">
-                                        Tomato
-                                    </option>
-
+                                    <option value="">Select a crop</option>
+                                    <option value="rice">Rice</option>
+                                    <option value="maize">Maize</option>
+                                    <option value="potatoes">Potatoes</option>
+                                    <option value="wheat">Wheat</option>
+                                    <option value="tomato">Tomato</option>
                                 </select>
-
                             </div>
 
-
-                            <!-- Annual Rainfall -->
                             <div class="yield-field">
-
-                                <label for="annual-rainfall">
-                                    Annual Rainfall (mm)
-                                </label>
-
+                                <label for="annual-rainfall">Annual rainfall (mm)</label>
                                 <input type="number" id="annual-rainfall" placeholder="e.g., 800" step="0.1" required>
-
                             </div>
 
-
-                            <!-- Pesticide Use -->
                             <div class="yield-field">
-
-                                <label for="pesticide-use">
-                                    Pesticide Use (tonnes)
-                                </label>
-
+                                <label for="pesticide-use">Pesticide use (tonnes)</label>
                                 <input type="number" id="pesticide-use" placeholder="e.g., 150" step="0.1" required>
-
                             </div>
 
-
-                            <!-- Average Temperature -->
                             <div class="yield-field">
-
-                                <label for="average-temperature">
-                                    Average Temperature (°C)
-                                </label>
-
+                                <label for="average-temperature">Average temperature (°C)</label>
                                 <input type="number" id="average-temperature" placeholder="e.g., 25" step="0.1"
                                     required>
-
                             </div>
-
                         </div>
 
-
-                        <!-- Predict Button -->
+                        <p class="availability-note">Prototype status: the yield prediction service is not connected in
+                            this demo, so no estimate will be invented from these inputs.</p>
                         <button type="submit" class="btn btn-primary yield-predict-btn">
-
-                            <i class="fa-solid fa-calculator"></i>
-
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                             Run Yield Prediction
-
                         </button>
-
+                        <p class="inline-status inline-status-info" id="yield-status" role="status" aria-live="polite"
+                            hidden></p>
                     </form>
-
                 </div>
-
             </div>
-
         </section>
 
-
-        <!-- Prediction Result -->
-        <section class="yield-results" id="yield-results">
-
+        <section class="yield-results" id="yield-results" aria-labelledby="yield-result-heading">
             <div class="yield-result-card">
-
-                <i class="fa-solid fa-chart-column"></i>
-
-                <h2>
-                    No prediction yet
-                </h2>
-
-                <p>
-                    Enter your farm conditions above and click
-                    <strong>Predict Yield</strong> to see the predicted crop yield.
-                </p>
-
+                <i class="fa-solid fa-chart-column" aria-hidden="true"></i>
+                <h2 id="yield-result-heading">Prediction service not connected</h2>
+                <p>Complete the form when you are ready. The entered values will remain available here while the yield
+                    endpoint is pending.</p>
+                <p class="inline-status inline-status-info" id="yield-result-status" role="status" aria-live="polite">No
+                    yield estimate is available yet.</p>
             </div>
-
         </section>
-
     </main>
 
+    <script src="../js/script.js?v=20260910-1554"></script>
 </body>
 
 </html>

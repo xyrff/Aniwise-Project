@@ -3,305 +3,173 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniWise — Crop Recommendation</title>
 
-    <title>AniWise - Smart Crop Recommendation System</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/../css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-
-    <!-- Shared website styles -->
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/crop.css">
-
-    <!-- Crop Recommendation styles -->
-    <link rel="stylesheet" href="crop-recommendation.css">
+    <link rel="stylesheet" href="../css/main.css?v=20260910-1552">
+    <link rel="stylesheet" href="../css/crop.css?v=20260910-1552">
 </head>
 
 <body>
-    <!-- ============================================
-                    HEADER / NAVIGATION
-         ============================================ -->
     <header class="site-header">
         <div class="container header-inner">
-
-            <!-- Logo + brand name -->
-            <div class="brand">
-                <div class="brand-icon">
-                    <img src="../images/sprout.png" alt="AniWise Logo">
-                </div>
-                <div>
+            <a class="brand" href="index.html" aria-label="AniWise home">
+                <span class="brand-icon"><img src="../images/sprout.png" alt=""></span>
+                <span>
                     <span class="brand-name">Ani<span class="brand-accent">Wise</span></span>
                     <span class="brand-tagline">Smart Crop Recommendation</span>
-                </div>
-            </div>
+                </span>
+            </a>
 
-            <!-- Nav links (desktop) -->
-            <nav class="nav-links">
-                <a href="index.html" class="nav-btn">
-                    <img src="../images/homepage.png" alt="">
-                    Home
-                </a> <a href="crop-recommendation.html" class="nav-btn">
-                    <img src="../images/growing-plant.png" alt="">
-                    Crop Recommendation
-                </a>
-                <a href="yield.html" class="nav-btn">
-                    <img src="../images/prediction.png" alt="">
-                    Yield Prediction
-                </a>
-
-                <a href="weather.html" class="nav-btn">
-                    <img src="../images/cloudy.png" alt="">
-                    Weather Forecast
-                </a>
-
-                <a href="about.html" class="nav-btn">
-                    <img src="../images/info.png" alt="">
-                    About
-                </a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="index.html" class="nav-btn"><img src="../images/homepage.png" alt="">Home</a>
+                <a href="crop-recommendation.html" class="nav-btn nav-btn-active" aria-current="page"><img
+                        src="../images/growing-plant.png" alt="">Crop Recommendation</a>
+                <a href="yield.html" class="nav-btn"><img src="../images/prediction.png" alt="">Yield Prediction</a>
+                <a href="weather.html" class="nav-btn"><img src="../images/cloudy.png" alt="">Weather Forecast</a>
+                <a href="about.html" class="nav-btn"><img src="../images/info.png" alt="">About</a>
             </nav>
-
-
+        </div>
     </header>
 
-    <!-- ============================================
-     CROP RECOMMENDATION SECTION
-     ============================================ -->
-    <section class="page-section" id="recommendation-section">
-        <div class="container">
-            <div class="page-heading">
-                <h2>Smart Crop <span class="section-heading-accent">Recommendation</span></h2>
-                <p>Enter your soil nutrient and environmental readings to get ML-recommended crop options.</p>
-            </div>
-
-
-            <div class="crop-feature">
-
-                <!-- ================================
-         INPUT FORM
-         ================================ -->
-
-                <div class="form-card">
-
-                    <form id="recommendation-form">
-
-                        <p class="form-section-label">
-                            Model Inputs
-                        </p>
-
-                        <div class="form-row form-row-3">
-
-                            <div class="form-field">
-                                <label>Nitrogen (N)</label>
-                                <input type="number" id="nitrogen" required placeholder="90">
-                            </div>
-
-                            <div class="form-field">
-                                <label>Phosphorus (P)</label>
-                                <input type="number" id="phosphorus" required placeholder="42">
-                            </div>
-
-                            <div class="form-field">
-                                <label>Potassium (K)</label>
-                                <input type="number" id="potassium" required placeholder="43">
-                            </div>
-
-                        </div>
-
-
-                        <div class="form-row form-row-2">
-
-                            <div class="form-field">
-                                <label>Temperature (°C)</label>
-
-                                <input type="number" step="0.1" id="temperature" required placeholder="25.5">
-                            </div>
-
-                            <div class="form-field">
-                                <label>Humidity (%)</label>
-
-                                <input type="number" id="humidity" required placeholder="80">
-                            </div>
-
-                        </div>
-
-
-                        <div class="form-row form-row-2">
-
-                            <div class="form-field">
-                                <label>Soil pH</label>
-
-                                <input type="number" step="0.1" min="0" max="14" id="ph" required placeholder="6.5">
-                            </div>
-
-                            <div class="form-field">
-                                <label>Rainfall (mm)</label>
-
-                                <input type="number" id="rainfall" required placeholder="210">
-                            </div>
-
-                        </div>
-
-
-                        <p class="form-hint">
-                            N-P-K and pH values typically come from a soil
-                            test kit. Sample values are shown as placeholders.
-                        </p>
-
-
-                        <!-- FARMER CONTEXT -->
-
-                        <p class="form-section-label form-section-label-spaced">
-                            Farmer Context
-
-                            <span class="form-section-note">
-                                (refines results, not sent to the ML model)
-                            </span>
-                        </p>
-
-
-                        <div class="form-field">
-
-                            <label>Farm Size (Hectares)</label>
-
-                            <input type="number" step="0.1" placeholder="1.0">
-
-                        </div>
-
-
-                        <div class="form-row form-row-2">
-
-                            <div class="form-field">
-
-                                <label>Water Availability</label>
-
-                                <select>
-                                    <option>High (Good irrigation)</option>
-                                    <option>Medium</option>
-                                    <option>Low (Rain-fed only)</option>
-                                </select>
-
-                            </div>
-
-
-                            <div class="form-field">
-
-                                <label>Farming Experience</label>
-
-                                <select>
-                                    <option>Beginner</option>
-                                    <option>Intermediate</option>
-                                    <option>Experienced</option>
-                                </select>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="form-field">
-
-                            <label>Market Preference</label>
-
-                            <select>
-                                <option>Food Grain</option>
-                                <option>Vegetable</option>
-                                <option>Cash Crop</option>
-                                <option>No preference</option>
-                            </select>
-
-                        </div>
-
-
-                        <button type="submit" class="btn btn-primary btn-block">
-
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-
-                            Run Crop Model
-
-                        </button>
-
-                    </form>
-
+    <main>
+        <section class="page-section" id="recommendation-section" aria-labelledby="recommendation-heading">
+            <div class="container">
+                <div class="page-heading">
+                    <h1 id="recommendation-heading">Smart Crop <span
+                            class="section-heading-accent">Recommendation</span></h1>
+                    <p>Enter soil and environmental readings to explore which crops may suit your farm conditions.</p>
                 </div>
 
+                <div class="crop-feature">
+                    <div class="form-card">
+                        <form id="recommendation-form">
+                            <p class="form-section-label">Model inputs</p>
 
-                <!-- ================================
-         RESULTS
-         ================================ -->
+                            <div class="form-row form-row-3">
+                                <div class="form-field">
+                                    <label for="nitrogen">Nitrogen (N)</label>
+                                    <input type="number" id="nitrogen" required placeholder="90"
+                                        aria-describedby="soil-input-hint">
+                                </div>
+                                <div class="form-field">
+                                    <label for="phosphorus">Phosphorus (P)</label>
+                                    <input type="number" id="phosphorus" required placeholder="42"
+                                        aria-describedby="soil-input-hint">
+                                </div>
+                                <div class="form-field">
+                                    <label for="potassium">Potassium (K)</label>
+                                    <input type="number" id="potassium" required placeholder="43"
+                                        aria-describedby="soil-input-hint">
+                                </div>
+                            </div>
 
-                <section class="results-section" id="results-section">
+                            <div class="form-row form-row-2">
+                                <div class="form-field">
+                                    <label for="temperature">Temperature (°C)</label>
+                                    <input type="number" step="0.1" id="temperature" required placeholder="25.5">
+                                </div>
+                                <div class="form-field">
+                                    <label for="humidity">Humidity (%)</label>
+                                    <input type="number" id="humidity" required placeholder="80">
+                                </div>
+                            </div>
 
-                    <div class="results-heading">
+                            <div class="form-row form-row-2">
+                                <div class="form-field">
+                                    <label for="ph">Soil pH</label>
+                                    <input type="number" step="0.1" min="0" max="14" id="ph" required placeholder="6.5">
+                                </div>
+                                <div class="form-field">
+                                    <label for="rainfall">Rainfall (mm)</label>
+                                    <input type="number" id="rainfall" required placeholder="210">
+                                </div>
+                            </div>
 
-                        <div>
+                            <p class="form-hint" id="soil-input-hint">N-P-K and pH values typically come from a soil
+                                test kit. Sample values are shown as placeholders.</p>
 
-                            <span class="results-label">
-                                ML RESULTS
-                            </span>
+                            <p class="form-section-label form-section-label-spaced">Farmer context <span
+                                    class="form-section-note">(helps explain the result, not sent to a model)</span></p>
 
-                            <h2>
-                                Recommended Crops
-                            </h2>
+                            <div class="form-field">
+                                <label for="farm-size">Farm size (hectares)</label>
+                                <input type="number" id="farm-size" step="0.1" placeholder="1.0">
+                            </div>
 
-                            <p>
-                                Crops ranked according to their suitability
-                                for your farm conditions.
-                            </p>
+                            <div class="form-row form-row-2">
+                                <div class="form-field">
+                                    <label for="water-availability">Water availability</label>
+                                    <select id="water-availability">
+                                        <option>High (Good irrigation)</option>
+                                        <option>Medium</option>
+                                        <option>Low (Rain-fed only)</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label for="farming-experience">Farming experience</label>
+                                    <select id="farming-experience">
+                                        <option>Beginner</option>
+                                        <option>Intermediate</option>
+                                        <option>Experienced</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                        </div>
+                            <div class="form-field">
+                                <label for="market-preference">Market preference</label>
+                                <select id="market-preference">
+                                    <option>Food Grain</option>
+                                    <option>Vegetable</option>
+                                    <option>Cash Crop</option>
+                                    <option>No preference</option>
+                                </select>
+                            </div>
 
-                        <span class="badge badge-primary">
-                            Ranked by Suitability
-                        </span>
-
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                                Explore crop options
+                            </button>
+                            <p class="availability-note">Model connection pending: this interface does not generate a
+                                recommendation until a prediction endpoint is connected.</p>
+                            <p class="inline-status inline-status-info" id="crop-status" role="status"
+                                aria-live="polite" hidden></p>
+                        </form>
                     </div>
 
-
-                    <div id="crop-results" class="results-list">
-
-                        <!--
-                Results will be generated here
-                by crop-recommendation.js
-            -->
-
-                        <div class="empty-results">
-
-                            <i class="fa-solid fa-seedling"></i>
-
-                            <h3>
-                                No prediction yet
-                            </h3>
-
-                            <p>
-                                Enter your farm conditions above
-                                and run the crop model to see
-                                recommendations.
-                            </p>
-
+                    <section class="results-section" id="results-section" aria-labelledby="results-heading">
+                        <div class="results-heading">
+                            <div>
+                                <p class="results-label">Current state</p>
+                                <h2 id="results-heading">Recommended crops</h2>
+                                <p>Results will appear here when the crop model is connected.</p>
+                            </div>
+                            <span class="badge badge-primary">Model pending</span>
                         </div>
 
-                    </div>
+                        <div id="crop-results" class="results-list">
+                            <div class="empty-results">
+                                <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+                                <h3>No recommendation yet</h3>
+                                <p>Enter your farm conditions above. Your inputs will stay on this page while the
+                                    recommendation service is pending.</p>
+                            </div>
+                        </div>
 
-
-                    <p class="results-note">
-
-                        <i class="fa-solid fa-circle-info"></i>
-
-                        Results will be generated by the trained
-                        machine learning model.
-
-                    </p>
-
-                </section>
-
+                        <p class="results-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> No crop
+                            ranking is generated in this demo until the model service is available.</p>
+                    </section>
+                </div>
             </div>
-        </div>
-        </div>
-    </section>
-    <script src="../js/script.js"></script>
+        </section>
+    </main>
+
+    <script src="../js/script.js?v=20260910-1554"></script>
 </body>
+
+</html>
