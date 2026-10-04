@@ -1,3 +1,5 @@
+import base64
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -14,6 +16,19 @@ st.set_page_config(page_title="AniWise", page_icon="🌱", layout="wide")
 # ---------- Load CSS ----------
 css_path = Path(__file__).parent / "styles.css"
 st.markdown(f"<style>{css_path.read_text()}</style>", unsafe_allow_html=True)
+
+icon_dir = Path(__file__).parent.parent / "images"
+
+
+def image_data_uri(filename: str) -> str:
+    encoded_image = base64.b64encode((icon_dir / filename).read_bytes()).decode("ascii")
+    return f"data:image/png;base64,{encoded_image}"
+
+
+farmhouse_icon = image_data_uri("farmhouse.png")
+farmer_icon = image_data_uri("farmer.png")
+calendar_icon = image_data_uri("forest.png")
+water_icon = image_data_uri("watering-plants.png")
 
 # ---------- Load model artifacts (cached so it only loads once) ----------
 
@@ -90,16 +105,10 @@ def build_pdf(inputs: dict, context: dict, results: list, timestamp: str) -> byt
 
 # ---------- Sidebar: Inputs ----------
 with st.sidebar:
-    leaf_svg = (
-        '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" '
-        'stroke="#1b5e20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
-        '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 1.5 3.5 1 8-.5 4.5-3.5 6.5-9 7-1.1.1-2 0-2-.4z"/>'
-        '<path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>'
-        '</svg>'
-    )
     st.markdown(
         f'<div class="brand-header">'
-        f'<div class="brand-icon-chip">{leaf_svg}</div>'
+        f'<div class="brand-icon-chip"><img src="{farmhouse_icon}" alt="Farmhouse" '
+        f'style="width:26px; height:26px; object-fit:contain;"></div>'
         f'<p class="brand-title">AniWise</p>'
         f'</div>',
         unsafe_allow_html=True,
@@ -146,7 +155,12 @@ with st.sidebar:
                 unsafe_allow_html=True)
 
     st.markdown("---")
-    st.markdown('<div class="section-header">👤 Farmer Context <span style="color:#94a3b8; font-weight:400; font-size:12px;">(optional)</span></div>', unsafe_allow_html=True)
+    st.markdown(
+        f'<div class="section-header"><img src="{farmer_icon}" alt="Farmer" '
+        f'style="width:18px; height:18px; object-fit:contain;"> Farmer Context '
+        f'<span style="color:#94a3b8; font-weight:400; font-size:12px;">(optional)</span></div>',
+        unsafe_allow_html=True,
+    )
 
     farm_size = st.number_input("Farm Size (ha)", min_value=0.0, value=1.5)
     water_avail = st.selectbox("Water Availability", [
@@ -260,7 +274,12 @@ else:
             f'{recommended_tag}'
             f'<p style="margin:6px 0 4px 0; color:#334155; font-size:14px;">{description}</p>'
             f'<p style="margin:0; color:#64748b; font-size:13px;">'
-            f'📅 {r["growth"]} &nbsp;&nbsp;💧 {r["water"]} water need'
+            f'<img src="{calendar_icon}" alt="Planting calendar" '
+            f'style="width:18px; height:18px; object-fit:contain; vertical-align:middle;"> '
+            f'{r["growth"]} &nbsp;&nbsp;'
+            f'<img src="{water_icon}" alt="Watering plants" '
+            f'style="width:18px; height:18px; object-fit:contain; vertical-align:middle;"> '
+            f'{r["water"]} water need'
             f'</p>'
             f'<span style="display:inline-block; margin-top:8px; background:#f1f5f9; color:#334155; '
             f'padding:4px 10px; border-radius:8px; font-size:12px; font-weight:600;">'
