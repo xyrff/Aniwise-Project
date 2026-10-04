@@ -1,7 +1,8 @@
+import pandas as pd
+
+
 # crop_metadata.py
-# Static reference info per crop — icons + illustrative stats.
-# NOT model output. These are reasonable general ranges used only to make
-# results more readable, same idea as the "rule-based layer" concept.
+# Static presentation metadata per crop. This is not model output.
 
 
 CROP_INFO = {
@@ -40,68 +41,66 @@ def get_crop_info(crop_label: str) -> dict:
     )
 
 
-# Typical agronomic ranges per crop, used only to generate a contextual
-# sentence (rule-based, not model output). Approximate values.
-CROP_RANGES = {
-    "rice":     {"rainfall": (180, 300), "humidity": (75, 90), "temp": (20, 27)},
-    "maize":    {"rainfall": (60, 110),  "humidity": (55, 75), "temp": (18, 26)},
-    "jute":     {"rainfall": (150, 250), "humidity": (70, 90), "temp": (24, 35)},
-    "papaya":   {"rainfall": (100, 180), "humidity": (60, 85), "temp": (22, 32)},
-    # ... idagdag mo yung iba kung meron kang time; may safe fallback naman sa baba
+DATASET_FEATURE_NAMES = {
+    "N": "Nitrogen",
+    "P": "Phosphorus",
+    "K": "Potassium",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "ph": "Soil pH",
+    "rainfall": "Rainfall",
 }
 
 
-# Typical agronomic ranges per crop, used only to generate a contextual
-# sentence (rule-based, not model output). Approximate values.
-CROP_RANGES = {
-    "rice":        {"rainfall": (180, 300), "humidity": (75, 90), "temp": (20, 27)},
-    "maize":       {"rainfall": (60, 110),  "humidity": (55, 75), "temp": (18, 26)},
-    "jute":        {"rainfall": (150, 250), "humidity": (70, 90), "temp": (24, 35)},
-    "papaya":      {"rainfall": (40, 180),  "humidity": (60, 85), "temp": (22, 32)},
-    "chickpea":    {"rainfall": (65, 105),  "humidity": (14, 25), "temp": (17, 21)},
-    "kidneybeans": {"rainfall": (60, 150),  "humidity": (18, 25), "temp": (15, 25)},
-    "pigeonpeas":  {"rainfall": (65, 200),  "humidity": (30, 70), "temp": (18, 37)},
-    "mothbeans":   {"rainfall": (25, 65),   "humidity": (40, 65), "temp": (24, 32)},
-    "mungbean":    {"rainfall": (25, 65),   "humidity": (80, 90), "temp": (27, 30)},
-    "blackgram":   {"rainfall": (65, 75),   "humidity": (60, 70), "temp": (25, 35)},
-    "lentil":      {"rainfall": (45, 55),   "humidity": (60, 70), "temp": (18, 30)},
-    "pomegranate": {"rainfall": (35, 110),  "humidity": (85, 95), "temp": (18, 25)},
-    "banana":      {"rainfall": (90, 130),  "humidity": (75, 85), "temp": (25, 30)},
-    "mango":       {"rainfall": (85, 105),  "humidity": (45, 55), "temp": (27, 37)},
-    "grapes":      {"rainfall": (65, 75),   "humidity": (80, 85), "temp": (8, 20)},
-    "watermelon":  {"rainfall": (40, 55),   "humidity": (80, 90), "temp": (24, 27)},
-    "muskmelon":   {"rainfall": (20, 30),   "humidity": (90, 95), "temp": (25, 30)},
-    "apple":       {"rainfall": (100, 125), "humidity": (90, 95), "temp": (21, 24)},
-    "orange":      {"rainfall": (100, 110), "humidity": (90, 95), "temp": (10, 35)},
-    "coconut":     {"rainfall": (140, 230), "humidity": (90, 100), "temp": (25, 30)},
-    "cotton":      {"rainfall": (60, 100),  "humidity": (70, 85), "temp": (22, 26)},
-    "coffee":      {"rainfall": (150, 250), "humidity": (50, 70), "temp": (22, 28)},
-}
+def compute_crop_iqr_ranges(training_data: pd.DataFrame) -> dict:
+    """Calculate per-crop Q1/Q3 bounds for all model features."""
+    required_columns = [*DATASET_FEATURE_NAMES, "label"]
+    missing_columns = sorted(set(required_columns) - set(training_data.columns))
+    if missing_columns:
+        raise ValueError(
+            f"Training dataset is missing required columns: {', '.join(missing_columns)}"
+        )
+    if training_data[required_columns].isna().any().any():
+        raise ValueError("Training dataset contains missing feature values or labels.")
+
+    features = list(DATASET_FEATURE_NAMES)
+    numeric_features = training_data[features].apply(pd.to_numeric, errors="raise")
+    grouped = numeric_features.assign(label=training_data["label"]).groupby("label")
+    q1 = grouped[features].quantile(0.25)
+    q3 = grouped[features].quantile(0.75)
+
+    return {
+        crop_label: {
+            display_name: (
+                float(q1.loc[crop_label, dataset_name]),
+                float(q3.loc[crop_label, dataset_name]),
+            )
+            for dataset_name, display_name in DATASET_FEATURE_NAMES.items()
+        }
+        for crop_label in q1.index
+    }
 
 
 def generate_description(crop_label: str, confidence: float,
-                         rainfall: float, humidity: float, temperature: float) -> str:
-    """Rule-based sentence comparing user inputs to this crop's typical
-    range. Tone and content depend on the actual confidence score, not
-    just the rank, so low-confidence crops honestly explain the mismatch."""
-    ranges = CROP_RANGES.get(crop_label)
+                         rainfall: float, humidity: float, temperature: float,
+                         crop_iqr_ranges: dict) -> str:
+    """Compare user inputs with the crop's training-data IQR."""
+    ranges = crop_iqr_ranges[crop_label]
 
     matched, mismatched = [], []
-    if ranges:
-        checks = [
-            ("rainfall", rainfall, "steady rainfall",
-             "low or excess rainfall for this crop"),
-            ("humidity", humidity, "a suitable humidity level",
-             "humidity outside this crop's typical range"),
-            ("temp", temperature, "a suitable temperature",
-             "temperature outside this crop's typical range"),
-        ]
-        for key, value, good_label, bad_label in checks:
-            lo, hi = ranges[key]
-            if lo <= value <= hi:
-                matched.append(good_label)
-            else:
-                mismatched.append(bad_label)
+    checks = [
+        ("Rainfall", rainfall, "steady rainfall", "low or excess rainfall for this crop"),
+        ("Humidity", humidity, "a suitable humidity level",
+         "humidity outside this crop's typical range"),
+        ("Temperature", temperature, "a suitable temperature",
+         "temperature outside this crop's typical range"),
+    ]
+    for key, value, good_label, bad_label in checks:
+        low, high = ranges[key]
+        if low <= value <= high:
+            matched.append(good_label)
+        else:
+            mismatched.append(bad_label)
 
     # Tone is driven by the model's actual confidence score.
     if confidence >= 50:
