@@ -1,0 +1,223 @@
+/* styles.css — injected via st.markdown(unsafe_allow_html=True)
+   Streamlit's default theme gets overridden here with our green palette. */
+
+:root {
+    --agri-50: #f0fdf4;
+    --agri-100: #dcfce7;
+    --agri-200: #bbf7d0;
+    --agri-700: #2e7d32;
+    --agri-800: #1b5e20;
+    --agri-900: #0f3913;
+}
+
+/* Sidebar background */
+section[data-testid="stSidebar"] {
+    background-color: #f8fafc;
+    border-right: 1px solid #e2e8f0;
+}
+
+/* Primary button (Predict Crop) */
+div.stButton>button {
+    background-color: var(--agri-700);
+    color: white;
+    border-radius: 12px;
+    border: none;
+    font-weight: 700;
+    padding: 0.6rem 1rem;
+}
+
+div.stButton>button:hover {
+    background-color: var(--agri-800);
+    color: white;
+}
+
+.crop-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.crop-card-top {
+    border: 2px solid var(--agri-700);
+    background: var(--agri-50);
+    box-shadow: 0 4px 14px rgba(46, 125, 50, 0.12);
+}
+
+.crop-icon-box {
+    width: 56px;
+    height: 56px;
+    background: var(--agri-100);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.crop-rank-badge {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    background: var(--agri-700);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 26px;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+.crop-recommended-tag {
+    color: var(--agri-700);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.confidence-badge {
+    background: var(--agri-100);
+    color: var(--agri-800);
+    font-weight: 800;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.session-tag {
+    background: var(--agri-50);
+    color: var(--agri-800);
+    border: 1px solid var(--agri-200);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+/* ===== Sidebar polish — match Figma ===== */
+
+/* Light green sidebar background (was default white) */
+section[data-testid="stSidebar"] {
+    background-color: var(--agri-50);
+    border-right: 1px solid var(--agri-200);
+}
+
+/* Remove the big empty gap at the very top of the sidebar */
+section[data-testid="stSidebar"]>div:first-child {
+    padding-top: 0.5rem;
+}
+
+/* Tighten vertical spacing between sidebar elements */
+section[data-testid="stSidebar"] .block-container {
+    padding-top: 0;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] {
+    gap: 0.35rem;
+}
+
+/* Hide the +/- stepper buttons on number inputs */
+section[data-testid="stSidebar"] button[data-testid="stNumberInputStepUp"],
+section[data-testid="stSidebar"] button[data-testid="stNumberInputStepDown"] {
+    display: none;
+}
+
+/* Hide the (?) tooltip icon — we'll use visible captions instead, like Figma */
+section[data-testid="stSidebar"] [data-testid="stTooltipIcon"] {
+    display: none;
+}
+
+/* Clean white input boxes, bigger number text, thin border */
+section[data-testid="stSidebar"] input[type="number"],
+section[data-testid="stSidebar"] input[type="text"] {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    padding: 10px 14px;
+}
+
+/* Field label (e.g. "Nitrogen") */
+section[data-testid="stSidebar"] label p {
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 2px;
+}
+
+/* Small helper caption under each field (e.g. "Available nitrogen · mg/kg") */
+.field-caption {
+    font-size: 11px;
+    color: #94a3b8;
+    margin: -4px 0 10px 2px;
+}
+
+/* Brand header row in sidebar */
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 6px 0;
+}
+
+.brand-icon-chip {
+    width: 52px;
+    height: 52px;
+    background: var(--agri-100);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.brand-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--agri-800);
+    margin: 0;
+    line-height: 1.1;
+}
+
+/* Section header with icon chip (e.g. "Soil & Climate Inputs") */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    color: #0f172a;
+    margin: 10px 0 2px 0;
+}
+
+/* Aggressive top-gap removal — targets every known wrapper layer */
+section[data-testid="stSidebar"]>div:first-child {
+    padding-top: 0 !important;
+}
+
+section[data-testid="stSidebar"] .block-container {
+    padding-top: 1rem !important;
+}
+
+div[data-testid="stSidebarUserContent"] {
+    padding-top: 0.5rem !important;
+}
+
+.brand-header {
+    margin-top: 0 !important;
+}
+
+/* The fixed header strip Streamlit reserves for the sidebar collapse
+   arrow ("<<") — this is the ~60px gap, not our own markup. */
+div[data-testid="stSidebarHeader"] {
+    padding: 0.1rem 0.5rem !important;
+    min-height: 0 !important;
+}
+
+/* Fully hides the collapse-arrow header strip and its reserved space */
+div[data-testid="stSidebarHeader"] {
+    display: none !important;
+}
