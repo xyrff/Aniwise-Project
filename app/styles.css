@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap');
 
 /* styles.css — injected via st.markdown(unsafe_allow_html=True)
-   Streamlit's default theme gets overridden here with our green palette. */
+   Consolidated version — each selector appears ONCE to avoid
+   later duplicate rules silently overriding earlier fixes. */
 
 :root {
     --body-font: 'Inter', -apple-system, 'Segoe UI', sans-serif;
@@ -13,6 +14,8 @@
     --agri-800: #1b5e20;
     --agri-900: #0f3913;
 }
+
+/* ===== Typography ===== */
 
 body,
 button,
@@ -58,13 +61,116 @@ p,
     line-height: 1.5;
 }
 
-/* Sidebar background */
+/* ===== Sidebar ===== */
+
 section[data-testid="stSidebar"] {
-    background-color: #f8fafc;
-    border-right: 1px solid #e2e8f0;
+    background-color: var(--agri-50);
+    border-right: 1px solid var(--agri-200);
 }
 
-/* Primary button (Predict Crop) */
+section[data-testid="stSidebar"]>div:first-child {
+    padding-top: 0 !important;
+}
+
+section[data-testid="stSidebar"] .block-container {
+    padding-top: 1rem !important;
+}
+
+div[data-testid="stSidebarUserContent"] {
+    padding-top: 0.5rem !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] {
+    gap: 0.5rem;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stElementContainer"]:has(> div[data-testid="stNumberInput"]):not(:has(+ div[data-testid="stElementContainer"] .field-caption)),
+section[data-testid="stSidebar"] div[data-testid="stElementContainer"]:has(> div[data-testid="stSelectbox"]) {
+    margin-bottom: 0.5rem;
+}
+
+section[data-testid="stSidebar"] button[data-testid="stNumberInputStepUp"],
+section[data-testid="stSidebar"] button[data-testid="stNumberInputStepDown"] {
+    display: none;
+}
+
+section[data-testid="stSidebar"] [data-testid="stTooltipIcon"] {
+    display: none;
+}
+
+section[data-testid="stSidebar"] input[type="number"],
+section[data-testid="stSidebar"] input[type="text"] {
+    font-family: var(--body-font) !important;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    padding: 0.5rem 1rem;
+}
+
+section[data-testid="stSidebar"] label p {
+    font-family: var(--body-font) !important;
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 0.3rem;
+}
+
+.field-caption {
+    font-size: 11px;
+    color: #94a3b8;
+    margin: 0 0 0.5rem 0.125rem;
+    line-height: 1.5;
+}
+
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0 0 0.5rem;
+}
+
+.brand-icon-chip {
+    width: 52px;
+    height: 52px;
+    background: var(--agri-100);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.brand-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--agri-800);
+    margin: 0;
+    line-height: 1.1;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 15px;
+    color: #0f172a;
+    margin: 1.5rem 0 0.5rem;
+}
+
+/* Hides the sidebar collapse-arrow header strip and its reserved space */
+div[data-testid="stSidebarHeader"] {
+    display: none !important;
+}
+
+section[data-testid="stSidebar"] div.stButton {
+    margin: 1rem 0;
+}
+
+/* ===== Buttons ===== */
+
 div.stButton>button {
     background-color: var(--agri-700);
     color: white;
@@ -72,6 +178,7 @@ div.stButton>button {
     border: none;
     font-weight: 700;
     padding: 0.5rem 1rem;
+    font-family: var(--body-font) !important;
 }
 
 div.stButton>button:hover {
@@ -83,6 +190,8 @@ div.stButton>button p {
     font-family: var(--body-font) !important;
     font-weight: 700;
 }
+
+/* ===== Crop result cards ===== */
 
 .crop-card {
     background: white;
@@ -101,122 +210,6 @@ div.stButton>button p {
 
 .crop-card p {
     line-height: 1.5;
-}
-
-.pipeline-diagram {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin: 1rem 0 1.5rem;
-}
-
-.pipeline-step {
-    display: flex;
-    flex: 1 1 0;
-    min-width: 0;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: var(--agri-50);
-    border: 1px solid var(--agri-200);
-    border-radius: 12px;
-}
-
-.pipeline-step strong {
-    color: var(--agri-800);
-    font-family: var(--heading-font);
-    font-size: 15px;
-}
-
-.pipeline-step span {
-    color: #475569;
-    font-size: 12px;
-    line-height: 1.5;
-}
-
-.pipeline-arrow {
-    align-self: center;
-    color: var(--agri-700);
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.compatibility-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.5rem;
-}
-
-.compatibility-item,
-.compatibility-summary {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: var(--agri-50);
-    border: 1px solid var(--agri-200);
-    border-radius: 12px;
-}
-
-.compatibility-item strong,
-.compatibility-summary strong {
-    color: var(--agri-800);
-    font-family: var(--heading-font);
-    font-size: 15px;
-}
-
-.compatibility-item span,
-.compatibility-summary span {
-    color: #475569;
-    font-size: 12px;
-    line-height: 1.5;
-}
-
-.compatibility-score {
-    color: var(--agri-700);
-    font-size: 13px;
-}
-
-.compatibility-score-low {
-    color: #475569;
-}
-
-.compatibility-summary {
-    grid-column: 1 / -1;
-}
-
-.farmer-insight {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    padding: 1rem 1.5rem;
-    background: var(--agri-50);
-    border: 1px solid var(--agri-200);
-    border-radius: 12px;
-}
-
-.farmer-insight span {
-    font-size: 20px;
-    line-height: 1.5;
-}
-
-.farmer-insight p {
-    margin: 0;
-    color: #334155;
-    line-height: 1.5;
-}
-
-@media (max-width: 760px) {
-    .pipeline-diagram {
-        flex-direction: column;
-    }
-
-    .pipeline-arrow {
-        transform: rotate(90deg);
-    }
 }
 
 .crop-icon-box {
@@ -269,155 +262,349 @@ div.stButton>button p {
     font-size: 13px;
 }
 
-/* ===== Sidebar polish — match Figma ===== */
+/* ===== Pipeline diagram ===== */
 
-/* Light green sidebar background (was default white) */
-section[data-testid="stSidebar"] {
-    background-color: var(--agri-50);
-    border-right: 1px solid var(--agri-200);
-}
-
-/* Remove the big empty gap at the very top of the sidebar */
-section[data-testid="stSidebar"]>div:first-child {
-    padding-top: 0.5rem;
-}
-
-/* Tighten vertical spacing between sidebar elements */
-section[data-testid="stSidebar"] .block-container {
-    padding-top: 0;
-}
-
-section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] {
+.pipeline-diagram {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
     gap: 0.5rem;
+    margin: 1rem 0 1.5rem;
 }
 
-section[data-testid="stSidebar"] div[data-testid="stElementContainer"]:has(> div[data-testid="stNumberInput"]):not(:has(+ div[data-testid="stElementContainer"] .field-caption)),
-section[data-testid="stSidebar"] div[data-testid="stElementContainer"]:has(> div[data-testid="stSelectbox"]) {
-    margin-bottom: 0.5rem;
-}
-
-/* Hide the +/- stepper buttons on number inputs */
-section[data-testid="stSidebar"] button[data-testid="stNumberInputStepUp"],
-section[data-testid="stSidebar"] button[data-testid="stNumberInputStepDown"] {
-    display: none;
-}
-
-/* Hide the (?) tooltip icon — we'll use visible captions instead, like Figma */
-section[data-testid="stSidebar"] [data-testid="stTooltipIcon"] {
-    display: none;
-}
-
-/* Clean white input boxes, bigger number text, thin border */
-section[data-testid="stSidebar"] input[type="number"],
-section[data-testid="stSidebar"] input[type="text"] {
-    font-family: var(--body-font) !important;
-    background-color: white;
-    border: 1px solid #e2e8f0;
+.pipeline-step {
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--agri-50);
+    border: 1px solid var(--agri-200);
     border-radius: 12px;
-    font-size: 16px;
-    padding: 0.5rem 1rem;
 }
 
-/* Field label (e.g. "Nitrogen") */
-section[data-testid="stSidebar"] label p {
-    font-family: var(--body-font) !important;
-    font-size: 13px;
-    font-weight: 500;
+.pipeline-step strong {
+    color: var(--agri-800);
+    font-family: var(--heading-font);
+    font-size: 15px;
+}
+
+.pipeline-step span {
     color: #475569;
-    margin-bottom: 0.3rem;
-}
-
-/* Small helper caption under each field (e.g. "Available nitrogen · mg/kg") */
-.field-caption {
-    font-size: 11px;
-    color: #94a3b8;
-    margin: 0 0 0.5rem 0.125rem;
+    font-size: 12px;
     line-height: 1.5;
 }
 
-/* Brand header row in sidebar */
-.brand-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 0 0 0.5rem;
+.pipeline-arrow {
+    align-self: center;
+    color: var(--agri-700);
+    font-size: 20px;
+    font-weight: 600;
 }
 
-.brand-icon-chip {
-    width: 52px;
-    height: 52px;
+@media (max-width: 760px) {
+    .pipeline-diagram {
+        flex-direction: column;
+    }
+
+    .pipeline-arrow {
+        transform: rotate(90deg);
+    }
+}
+
+/* ===== Compatibility grid ===== */
+
+.compatibility-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.5rem;
+}
+
+.compatibility-item,
+.compatibility-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--agri-50);
+    border: 1px solid var(--agri-200);
+    border-radius: 12px;
+}
+
+.compatibility-item strong,
+.compatibility-summary strong {
+    color: var(--agri-800);
+    font-family: var(--heading-font);
+    font-size: 15px;
+}
+
+.compatibility-item span,
+.compatibility-summary span {
+    color: #475569;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.compatibility-score {
+    color: var(--agri-700);
+    font-size: 13px;
+}
+
+.compatibility-score-low {
+    color: #475569;
+}
+
+.compatibility-summary {
+    grid-column: 1 / -1;
+}
+
+/* ===== Farmer insight box ===== */
+
+.farmer-insight {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: var(--agri-50);
+    border: 1px solid var(--agri-200);
+    border-radius: 12px;
+}
+
+.farmer-insight span {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.farmer-insight p {
+    margin: 0;
+    color: #334155;
+    line-height: 1.5;
+}
+
+/* ===== Landing Page ===== */
+
+div[data-testid="stAppViewContainer"] .block-container {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1rem !important;
+}
+
+div[data-testid="stAppViewContainer"]:has(> section[data-testid="stSidebar"]) .block-container {
+    padding-top: 3.5rem !important;
+}
+
+section[data-testid="stMain"] .block-container h5 {
+    line-height: 1.4;
+    margin-top: 0;
+}
+
+.landing-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 4px 24px 4px;
+}
+
+.landing-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--agri-800);
+}
+
+.landing-nav-links a {
+    margin-left: 28px;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.landing-nav-links a:hover {
+    color: var(--agri-700);
+}
+
+.hero-copy-landing {
+    text-align: center;
+}
+
+/* Hero container — targets the real Streamlit container via its key */
+.st-key-hero_section {
+    background: var(--agri-50);
+    border-radius: 20px;
+    padding: 48px 40px 36px 40px;
+}
+
+.hero-badge-landing {
+    display: inline-block;
     background: var(--agri-100);
-    border-radius: 14px;
+    color: var(--agri-800);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+}
+
+.st-key-hero_section .hero-title-landing {
+    font-size: 40px;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    color: var(--agri-900);
+    line-height: 1.2;
+    margin: 0 0 0.5rem;
+    padding: 0;
+    width: 100%;
+}
+
+.hero-tagline-landing {
+    font-family: var(--body-font);
+    font-size: 1rem;
+    font-weight: 400;
+    color: #5b6b5b;
+    line-height: 1.5;
+    max-width: 560px;
+    width: 100%;
+    margin: 0 auto 1.5rem;
+}
+
+.icon-chip-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.icon-chip-small {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--agri-100);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
-    flex-shrink: 0;
+    font-size: 16px;
+    opacity: 0.6;
 }
 
-.brand-title {
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--agri-800);
-    margin: 0;
-    line-height: 1.1;
-}
-
-/* Section header with icon chip (e.g. "Soil & Climate Inputs") */
-.section-header {
+.icon-chip-main {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--agri-200);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-weight: 600;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.section-title-landing {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--agri-800);
+    margin: 48px 0 28px 0;
+}
+
+/* How it Works cards — single definition, bigger breathing room */
+.step-card-landing {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 32px 24px;
+    min-height: 150px;
+    height: 100%;
+}
+
+.step-icon-chip {
+    width: 36px;
+    height: 36px;
+    background: var(--agri-100);
+    color: var(--agri-700);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.step-title-landing {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--agri-800);
+    margin-bottom: 6px;
+}
+
+.step-desc-landing {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* Team section container */
+.st-key-team_section {
+    background: var(--agri-50);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.team-card-landing {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 28px 16px;
+    text-align: center;
+    height: 100%;
+}
+
+.team-avatar-placeholder {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 14px auto;
+}
+
+.team-name-landing {
     font-size: 15px;
+    font-weight: 700;
     color: #0f172a;
-    margin: 1.5rem 0 0.5rem;
 }
 
-/* Aggressive top-gap removal — targets every known wrapper layer */
-section[data-testid="stSidebar"]>div:first-child {
-    padding-top: 0 !important;
+.team-role-landing {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 2px;
 }
 
-section[data-testid="stSidebar"] .block-container {
-    padding-top: 1rem !important;
+/* Footer — single definition */
+.footer-landing {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 4px 0 4px;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 8px;
 }
 
-div[data-testid="stSidebarUserContent"] {
-    padding-top: 0.5rem !important;
+.footer-landing p,
+.footer-landing div {
+    margin: 20;
 }
 
-.brand-header {
-    margin-top: 0 !important;
-}
-
-/* The fixed header strip Streamlit reserves for the sidebar collapse
-   arrow ("<<") — this is the ~60px gap, not our own markup. */
-div[data-testid="stSidebarHeader"] {
-    padding: 0.1rem 0.5rem !important;
-    min-height: 0 !important;
-}
-
-/* Fully hides the collapse-arrow header strip and its reserved space */
-div[data-testid="stSidebarHeader"] {
-    display: none !important;
-}
-
-section[data-testid="stSidebar"] div.stButton {
-    margin: 1rem 0;
-}
-
-button,
-select,
-textarea {
-    font-family: var(--body-font) !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: var(--heading-font) !important;
+.footer-brand-landing {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--agri-800);
 }
