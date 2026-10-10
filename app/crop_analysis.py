@@ -18,11 +18,7 @@ def calculate_compatibility(crop_label: str, inputs: dict, crop_iqr_ranges: dict
         "Temperature": "considering a different planting window",
         "Humidity": "checking local seasonal conditions before planting",
         "Soil pH": "checking with a local adviser before changing soil pH",
-        "Rainfall": (
-            "planning supplemental irrigation"
-            if inputs["Rainfall"] < crop_iqr_ranges[crop_label]["Rainfall"][0]
-            else "checking drainage and water management"
-        ),
+        "Rainfall": "reviewing rainfall suitability for planting",
     }
 
     scored_factors = []
@@ -52,7 +48,7 @@ def calculate_compatibility(crop_label: str, inputs: dict, crop_iqr_ranges: dict
     return scored_factors
 
 
-def build_farmer_interpretation(
+def build_crop_interpretation(
     crop: dict, compatibility: list, results: list, crop_iqr_ranges: dict
 ) -> str:
     strongest = max(compatibility, key=lambda factor: factor["compatibility"])

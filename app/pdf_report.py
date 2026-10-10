@@ -6,7 +6,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
 
 from crop_analysis import (
-    build_farmer_interpretation,
+    build_crop_interpretation,
     calculate_compatibility,
     normalize_feature,
 )
@@ -154,13 +154,13 @@ def _input_table(pdf: FPDF, rows: list[tuple[str, str]]) -> None:
 
 def build_pdf_report(
     inputs: dict,
-    context: dict,
     results: list[dict],
     timestamp: str,
     model_inputs: dict,
     crop_iqr_ranges: dict,
     feature_profiles: dict,
     logo_path: Path,
+    warnings: list[str] | None = None,
 ) -> bytes:
     if not results:
         raise ValueError("At least one crop result is required to build a PDF report.")
@@ -179,6 +179,15 @@ def build_pdf_report(
     pdf.set_font("Helvetica", "", 9)
     pdf.set_text_color(100, 100, 100)
     pdf.cell(0, 6, f"Generated {timestamp}", ln=True)
+    if warnings:
+        pdf.set_font("Helvetica", "B", 9)
+        pdf.set_text_color(154, 52, 18)
+        pdf.multi_cell(
+            0,
+            5,
+            "Caution: One or more inputs were outside the model training range; "
+            "this prediction may be unreliable.",
+        )
     pdf.ln(3)
 
     input_labels = {
@@ -192,16 +201,6 @@ def build_pdf_report(
     }
     _section_heading(pdf, "Soil & Climate Inputs")
     _input_table(pdf, [(input_labels.get(key, key), str(value)) for key, value in inputs.items()])
-
-    pdf.ln(2)
-    _section_heading(pdf, "Farmer Context")
-    context_labels = {
-        "Farm size": "Farm size",
-        "Water": "Water",
-        "Experience": "Experience",
-        "Market": "Market",
-    }
-    _input_table(pdf, [(context_labels.get(key, key), str(value)) for key, value in context.items()])
 
     pdf.ln(2)
     _section_heading(pdf, "Visualization")
@@ -233,12 +232,12 @@ def build_pdf_report(
     for index, crop in enumerate(results, start=1):
         compatibility = calculate_compatibility(
             crop["label"], model_inputs, crop_iqr_ranges)
-        interpretation = build_farmer_interpretation(
+        interpretation = build_crop_interpretation(
             crop, compatibility, results[index - 1:], crop_iqr_ranges)
         if all(factor["compatibility"] >= 70 for factor in compatibility):
             interpretation += (
                 f" Consider whether {crop['display']}'s growing season and resource "
-                "needs fit your farm plan and local conditions."
+                "needs fit local field conditions."
             )
 
         pdf.set_font("Helvetica", "B", 11)
@@ -268,7 +267,7 @@ def build_pdf_report(
         "patterns learned from historical data, not a guarantee of yield, income, or "
         "suitability for your specific field. Please consider local conditions not "
         "captured in this analysis (pest and disease pressure, recent weather events, "
-        "market access, and input costs) and consult your local agricultural extension "
+        "and input costs) and consult your local agricultural extension "
         "officer, cooperative adviser, or another qualified expert before making final "
         "planting decisions."
     )

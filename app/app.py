@@ -12,7 +12,7 @@ from datetime import datetime
 
 
 from crop_analysis import (
-    build_farmer_interpretation,
+    build_crop_interpretation,
     calculate_compatibility,
     normalize_feature,
 )
@@ -22,6 +22,7 @@ from crop_metadata import (
     generate_description,
 )
 from pdf_report import build_pdf_report
+from validators import validate_inputs
 
 st.set_page_config(page_title="AniWise", page_icon="🌱", layout="wide")
 
@@ -39,7 +40,6 @@ def image_data_uri(filename: str) -> str:
 
 
 farmhouse_icon = image_data_uri("farmhouse.png")
-farmer_icon = image_data_uri("farmer.png")
 calendar_icon = image_data_uri("forest.png")
 water_icon = image_data_uri("watering-plants.png")
 
@@ -88,13 +88,39 @@ else:
 
         return model, feature_names, class_labels, crop_iqr_ranges, feature_profiles
 
-    model, FEATURES, CLASS_LABELS, CROP_IQR_RANGES, FEATURE_PROFILES = load_artifacts()
+    try:
+        try:
+            model, FEATURES, CLASS_LABELS, CROP_IQR_RANGES, FEATURE_PROFILES = load_artifacts()
+        except Exception:
+            st.error(
+                "Model could not be loaded. Please check that the model and training "
+                "data files are available, then try again."
+            )
+            st.stop()
+    except Exception:
+        st.error(
+            "Model could not be loaded. Please check that the model and training "
+            "data files are available, then try again."
+        )
+        st.stop()
 
     # ---------- Session state setup ----------
     if "history" not in st.session_state:
         st.session_state.history = []  # list of dicts, newest first
     if "latest_result" not in st.session_state:
         st.session_state.latest_result = None
+    if "input_errors" not in st.session_state:
+        st.session_state.input_errors = []
+    if "input_warnings" not in st.session_state:
+        st.session_state.input_warnings = []
+    if "input_notes" not in st.session_state:
+        st.session_state.input_notes = []
+    if "prediction_error" not in st.session_state:
+        st.session_state.prediction_error = None
+    if st.session_state.latest_result is not None:
+        st.session_state.latest_result.pop("context", None)
+    for saved_result in st.session_state.history:
+        saved_result.pop("context", None)
 
     # ---------- Sidebar: Inputs ----------
     with st.sidebar:
@@ -114,137 +140,181 @@ else:
         st.caption("Use your latest soil test and local averages.")
 
         nitrogen = st.number_input(
-            "Nitrogen (N)", min_value=0, max_value=200, value=90)
+            "Nitrogen (N)", value=None, min_value=None, max_value=None,
+            step=1.0, format="%.2f", placeholder="e.g. 90",
+        )
         st.markdown('<p class="field-caption">Available nitrogen · mg/kg</p>',
                     unsafe_allow_html=True)
 
         phosphorus = st.number_input(
-            "Phosphorus (P)", min_value=0, max_value=200, value=42)
+            "Phosphorus (P)", value=None, min_value=None, max_value=None,
+            step=1.0, format="%.2f", placeholder="e.g. 90",
+        )
         st.markdown('<p class="field-caption">Available phosphorus · mg/kg</p>',
                     unsafe_allow_html=True)
 
         potassium = st.number_input(
-            "Potassium (K)", min_value=0, max_value=250, value=43)
+            "Potassium (K)", value=None, min_value=None, max_value=None,
+            step=1.0, format="%.2f", placeholder="e.g. 90",
+        )
         st.markdown('<p class="field-caption">Available potassium · mg/kg</p>',
                     unsafe_allow_html=True)
 
         temperature = st.number_input(
-            "Temperature (°C)", min_value=0.0, max_value=55.0, value=26.0)
+            "Temperature (°C)", value=None, min_value=None, max_value=None,
+            step=0.1, format="%.1f", placeholder="e.g. 26",
+        )
         st.markdown('<p class="field-caption">Average air temperature · °C</p>',
                     unsafe_allow_html=True)
 
         humidity = st.number_input(
-            "Humidity (%)", min_value=0.0, max_value=100.0, value=82.0)
+            "Humidity (%)", value=None, min_value=None, max_value=None,
+            step=0.1, format="%.1f", placeholder="e.g. 82",
+        )
         st.markdown('<p class="field-caption">Relative humidity · %</p>',
                     unsafe_allow_html=True)
 
-        ph = st.number_input("Soil pH", min_value=0.0,
-                             max_value=14.0, value=6.5)
+        ph = st.number_input(
+            "Soil pH", value=None, min_value=None, max_value=None,
+            step=0.1, format="%.2f", placeholder="e.g. 6.5",
+        )
         st.markdown('<p class="field-caption">Soil acidity · scale of 0-14</p>',
                     unsafe_allow_html=True)
 
         rainfall = st.number_input(
-            "Rainfall (mm)", min_value=0.0, max_value=400.0, value=203.0)
+            "Rainfall (mm)", value=None, min_value=None, max_value=None,
+            step=0.1, format="%.1f", placeholder="e.g. 203",
+        )
         st.markdown('<p class="field-caption">Average monthly rainfall · mm</p>',
                     unsafe_allow_html=True)
-
-        st.markdown("---")
-        st.markdown(
-            f'<div class="section-header"><img src="{farmer_icon}" alt="Farmer" '
-            f'style="width:18px; height:18px; object-fit:contain;"> Farmer Context '
-            f'<span style="color:#94a3b8; font-weight:400; font-size:12px;">(optional)</span></div>',
-            unsafe_allow_html=True,
-        )
-
-        farm_size = st.number_input("Farm Size (ha)", min_value=0.0, value=1.5)
-        water_avail = st.selectbox("Water Availability", [
-            "Reliable irrigation", "Seasonal / rain-fed", "Limited"])
-        experience = st.selectbox("Farming Experience", [
-            "Less than 1 year", "1-3 years", "3-5 years", "5+ years"])
-        market_pref = st.selectbox("Market Preference", [
-            "Local market", "Export", "No preference"])
 
         st.markdown("---")
         predict_clicked = st.button("Predict Crop", use_container_width=True)
 
     # ---------- Run prediction ----------
     if predict_clicked:
-        input_row = pd.DataFrame([[nitrogen, phosphorus, potassium, temperature, humidity, ph, rainfall]],
-                                 columns=FEATURES)
-        probabilities = model.predict_proba(input_row)[0]
-        top_idx = np.argsort(probabilities)[::-1][:3]
-
-        results = []
-        for idx in top_idx:
-            crop_label = model.classes_[idx]
-            info = get_crop_info(crop_label)
-            results.append({
-                "label": crop_label,
-                "display": info["display"],
-                "icon": info["icon"],
-                "growth": info["growth"],
-                "water": info["water"],
-                "profit": info["profit"],
-                "confidence": probabilities[idx] * 100,
-            })
-
-        timestamp = datetime.now().strftime("%d %b %Y · %I:%M %p")
-
-        result_record = {
-            "timestamp": timestamp,
-            "inputs": {
-                "Nitrogen": f"{nitrogen} mg/kg", "Phosphorus": f"{phosphorus} mg/kg",
-                "Potassium": f"{potassium} mg/kg", "Temperature": f"{temperature} °C",
-                "Humidity": f"{humidity} %", "Soil pH": f"{ph}", "Rainfall": f"{rainfall} mm",
-            },
-            "context": {
-                "Farm size": f"{farm_size} ha", "Water": water_avail,
-                "Experience": experience, "Market": market_pref,
-            },
-            "model_inputs": {
-                "Nitrogen": nitrogen,
-                "Phosphorus": phosphorus,
-                "Potassium": potassium,
-                "Temperature": temperature,
-                "Humidity": humidity,
-                "Soil pH": ph,
-                "Rainfall": rainfall,
-            },
-            "results": results,
+        st.session_state.latest_result = None
+        st.session_state.prediction_error = None
+        values = {
+            "N": nitrogen,
+            "P": phosphorus,
+            "K": potassium,
+            "temperature": temperature,
+            "humidity": humidity,
+            "ph": ph,
+            "rainfall": rainfall,
         }
+        errors, warnings, notes = validate_inputs(values)
+        st.session_state.input_errors = errors
+        st.session_state.input_warnings = warnings
+        st.session_state.input_notes = notes
 
-        st.session_state.latest_result = result_record
-        st.session_state.history.insert(0, result_record)  # newest first
+        if not errors:
+            model_values = {key: float(value) for key, value in values.items()}
+            try:
+                input_row = pd.DataFrame(
+                    [[model_values[key] for key in FEATURES]], columns=FEATURES
+                )
+                probabilities = model.predict_proba(input_row)[0]
+                top_idx = np.argsort(probabilities)[::-1][:3]
+
+                results = []
+                for idx in top_idx:
+                    crop_label = model.classes_[idx]
+                    info = get_crop_info(crop_label)
+                    results.append({
+                        "label": crop_label,
+                        "display": info["display"],
+                        "icon": info["icon"],
+                        "growth": info["growth"],
+                        "water": info["water"],
+                        "profit": info["profit"],
+                        "confidence": probabilities[idx] * 100,
+                    })
+
+                timestamp = datetime.now().strftime("%d %b %Y · %I:%M %p")
+                result_record = {
+                    "timestamp": timestamp,
+                    "inputs": {
+                        "Nitrogen": f"{model_values['N']} mg/kg",
+                        "Phosphorus": f"{model_values['P']} mg/kg",
+                        "Potassium": f"{model_values['K']} mg/kg",
+                        "Temperature": f"{model_values['temperature']} °C",
+                        "Humidity": f"{model_values['humidity']} %",
+                        "Soil pH": f"{model_values['ph']}",
+                        "Rainfall": f"{model_values['rainfall']} mm",
+                    },
+                    "model_inputs": {
+                        "Nitrogen": model_values["N"],
+                        "Phosphorus": model_values["P"],
+                        "Potassium": model_values["K"],
+                        "Temperature": model_values["temperature"],
+                        "Humidity": model_values["humidity"],
+                        "Soil pH": model_values["ph"],
+                        "Rainfall": model_values["rainfall"],
+                    },
+                    "results": results,
+                    "warnings": warnings,
+                }
+
+                st.session_state.latest_result = result_record
+                st.session_state.history.insert(0, result_record)
+            except Exception:
+                st.session_state.prediction_error = (
+                    "Prediction could not be generated. Please check your inputs "
+                    "and try again."
+                )
 
     # ---------- Main content ----------
     st.markdown("##### 🌿 GROW WITH CONFIDENCE")
     st.title("Your Crop Recommendation")
-    st.caption("The best-fit crops for your soil, climate, and farm context.")
+    st.caption("The best-fit crops for your soil and climate conditions.")
+
+    for error in st.session_state.input_errors:
+        st.error(error)
+    for warning in st.session_state.input_warnings:
+        st.warning(warning)
+    for note in st.session_state.input_notes:
+        st.info(note)
+    if st.session_state.prediction_error:
+        st.error(st.session_state.prediction_error)
 
     if st.session_state.latest_result is None:
         st.info(
             "Fill in your soil and climate data in the sidebar, then click **Predict Crop** to get started.")
     else:
         record = st.session_state.latest_result
+        record_warnings = record.get("warnings", [])
 
         col_status, col_save = st.columns([3, 1])
         with col_status:
             st.success(f"Prediction complete · {record['timestamp']}")
         with col_save:
             with st.popover("⬇ Save Result", use_container_width=True):
-                pdf_bytes = build_pdf_report(
-                    record["inputs"],
-                    record["context"],
-                    record["results"],
-                    record["timestamp"],
-                    record["model_inputs"],
-                    CROP_IQR_RANGES,
-                    FEATURE_PROFILES,
-                    icon_dir / "farmhouse.png",
-                )
-                st.download_button("Download as PDF", data=pdf_bytes,
-                                   file_name="aniwise_result.pdf", mime="application/pdf",
-                                   use_container_width=True)
+                try:
+                    pdf_bytes = build_pdf_report(
+                        record["inputs"],
+                        record["results"],
+                        record["timestamp"],
+                        record["model_inputs"],
+                        CROP_IQR_RANGES,
+                        FEATURE_PROFILES,
+                        icon_dir / "farmhouse.png",
+                        record_warnings,
+                    )
+                except Exception:
+                    st.error(
+                        "PDF export could not be completed. Please try again later."
+                    )
+                else:
+                    st.download_button(
+                        "Download as PDF",
+                        data=pdf_bytes,
+                        file_name="aniwise_result.pdf",
+                        mime="application/pdf",
+                        use_container_width=True,
+                    )
+
 
                 csv_lines = ["Crop,Confidence(%),Growth,Water,Profit"]
                 for r in record["results"]:
@@ -270,7 +340,13 @@ else:
                 rainfall=rainfall, humidity=humidity, temperature=temperature,
                 crop_iqr_ranges=CROP_IQR_RANGES,
             )
-            recommended_tag = '<p class="crop-recommended-tag">Recommended for your farm</p>' if i == 0 else ""
+            recommended_tag = '<p class="crop-recommended-tag">Top recommendation</p>' if i == 0 else ""
+            caution_line = (
+                '<p style="margin:0.5rem 0; color:#9a3412; font-size:13px;">'
+                'Caution: One or more inputs were outside the model training range; '
+                'this prediction may be unreliable.</p>'
+                if record_warnings else ""
+            )
 
             # Built as ONE continuous string (no real newlines inside the HTML)
             # so Streamlit/Markdown never mistakes indented lines for a code block.
@@ -283,6 +359,7 @@ else:
                 f'<span class="crop-rank-badge">{i+1}</span>'
                 f'&nbsp;<strong style="font-size:18px;">{r["display"]}</strong>'
                 f'{recommended_tag}'
+                f'{caution_line}'
                 f'<p style="margin:0.5rem 0; color:#334155; font-size:14px;">{description}</p>'
                 f'<p style="margin:0; color:#64748b; font-size:13px;">'
                 f'<img src="{calendar_icon}" alt="Planting calendar" '
@@ -501,10 +578,10 @@ else:
             )
             st.plotly_chart(compatibility_figure, use_container_width=True)
 
-            interpretation = build_farmer_interpretation(
+            interpretation = build_crop_interpretation(
                 top_crop, compatibility, record["results"], CROP_IQR_RANGES)
             st.markdown(
-                '<div class="farmer-insight">'
+                '<div class="crop-insight">'
                 '<span aria-hidden="true">💡</span>'
                 f'<p>{escape(interpretation)}</p>'
                 '</div>',
@@ -515,7 +592,7 @@ else:
                    "Profit potential varies with local prices, costs, and growing conditions.")
 
         with st.expander("📋 Submitted input values"):
-            st.json({**record["inputs"], **record["context"]})
+            st.json(record["inputs"])
 
         with st.expander(f"🕓 Session history ({len(st.session_state.history)} predictions)"):
             st.markdown('<div class="session-tag">🛡 This session only — not saved to an account.</div>',

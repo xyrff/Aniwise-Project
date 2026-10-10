@@ -122,4 +122,4 @@ def generate_description(crop_label: str, confidence: float,
             joined = ", ".join(
                 mismatched[:-1]) + (" and " + mismatched[-1] if len(mismatched) > 1 else mismatched[0])
             return f"Low-confidence match. Your {joined}, making this crop less likely to perform well under your current conditions."
-        return "Low-confidence match based on your current conditions — likely not well-suited for this farm setup."
+        return "Low-confidence match based on your current conditions — likely not well-suited to this field."

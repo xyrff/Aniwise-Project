@@ -16,7 +16,7 @@ AniWise_CropRecommendation/
 │   ├── app.py                  # Main app entry point
 │   ├── crop_metadata.py        # Crop reference data (scientific names, categories, etc.)
 │   ├── styles.css              # Custom styling
-│   └── images/                 # Icon assets (farmhouse, farmer, forest, watering-plants)
+│   └── images/                 # Icon assets (farmhouse, forest, watering-plants)
 ├── data/                       # Original and processed datasets
 │   └── Crop_recommendation.csv
 ├── models/                     # Saved trained model + supporting files

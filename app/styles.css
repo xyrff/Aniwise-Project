@@ -89,11 +89,6 @@ section[data-testid="stSidebar"] div[data-testid="stElementContainer"]:has(> div
     margin-bottom: 0.5rem;
 }
 
-section[data-testid="stSidebar"] button[data-testid="stNumberInputStepUp"],
-section[data-testid="stSidebar"] button[data-testid="stNumberInputStepDown"] {
-    display: none;
-}
-
 section[data-testid="stSidebar"] [data-testid="stTooltipIcon"] {
     display: none;
 }
@@ -119,7 +114,7 @@ section[data-testid="stSidebar"] label p {
 .field-caption {
     font-size: 11px;
     color: #94a3b8;
-    margin: 0 0 0.5rem 0.125rem;
+    margin: 0 0 0.75rem 0.125rem;
     line-height: 1.5;
 }
 
@@ -360,9 +355,9 @@ div.stButton>button p {
     grid-column: 1 / -1;
 }
 
-/* ===== Farmer insight box ===== */
+/* ===== Crop insight box ===== */
 
-.farmer-insight {
+.crop-insight {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
@@ -373,12 +368,12 @@ div.stButton>button p {
     border-radius: 12px;
 }
 
-.farmer-insight span {
+.crop-insight span {
     font-size: 20px;
     line-height: 1.5;
 }
 
-.farmer-insight p {
+.crop-insight p {
     margin: 0;
     color: #334155;
     line-height: 1.5;
