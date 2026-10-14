@@ -1,6 +1,7 @@
 from landing import render_landing_page
 import base64
 from html import escape
+import logging
 
 import streamlit as st
 import pandas as pd
@@ -23,6 +24,8 @@ from crop_metadata import (
 )
 from pdf_report import build_pdf_report
 from validators import validate_inputs
+
+logger = logging.getLogger(__name__)
 
 st.set_page_config(page_title="AniWise", page_icon="🌱", layout="wide")
 
@@ -89,15 +92,9 @@ else:
         return model, feature_names, class_labels, crop_iqr_ranges, feature_profiles
 
     try:
-        try:
-            model, FEATURES, CLASS_LABELS, CROP_IQR_RANGES, FEATURE_PROFILES = load_artifacts()
-        except Exception:
-            st.error(
-                "Model could not be loaded. Please check that the model and training "
-                "data files are available, then try again."
-            )
-            st.stop()
+        model, FEATURES, CLASS_LABELS, CROP_IQR_RANGES, FEATURE_PROFILES = load_artifacts()
     except Exception:
+        logger.exception("Failed to load crop recommendation artifacts")
         st.error(
             "Model could not be loaded. Please check that the model and training "
             "data files are available, then try again."
@@ -260,6 +257,7 @@ else:
                 st.session_state.latest_result = result_record
                 st.session_state.history.insert(0, result_record)
             except Exception:
+                logger.exception("Crop prediction failed")
                 st.session_state.prediction_error = (
                     "Prediction could not be generated. Please check your inputs "
                     "and try again."
@@ -314,7 +312,6 @@ else:
                         mime="application/pdf",
                         use_container_width=True,
                     )
-
 
                 csv_lines = ["Crop,Confidence(%),Growth,Water,Profit"]
                 for r in record["results"]:
@@ -502,12 +499,14 @@ else:
 
             radar_labels = [label for _, label in radar_features]
             input_values = [
-                normalize_feature(feature, model_inputs[label], FEATURE_PROFILES)
+                normalize_feature(
+                    feature, model_inputs[label], FEATURE_PROFILES)
                 for feature, label in radar_features
             ]
             crop_medians = FEATURE_PROFILES["crop_medians"][top_crop["label"]]
             typical_values = [
-                normalize_feature(feature, crop_medians[feature], FEATURE_PROFILES)
+                normalize_feature(
+                    feature, crop_medians[feature], FEATURE_PROFILES)
                 for feature, _ in radar_features
             ]
             radar_labels.append(radar_labels[0])
