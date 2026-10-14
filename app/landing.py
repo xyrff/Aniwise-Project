@@ -1,4 +1,9 @@
+import base64
+from pathlib import Path
+
 import streamlit as st
+
+APP_DIR = Path(__file__).parent
 
 AVATAR_SVG = (
     '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" '
@@ -9,10 +14,59 @@ AVATAR_SVG = (
 )
 
 TEAM_MEMBERS = [
-    {"name": "Name", "role": "Role"},
-    {"name": "Name", "role": "Role"},
-    {"name": "Name", "role": "Role"},
+    {
+        "name": "John Clark E. Sac",
+        "role": "Project Lead · Developer",
+        "photo": "images/pogi.jfif",
+    },
+    {
+        "name": "Cedric Kristoff R. Sigue",
+        "role": "ML Engineer · Documentation",
+        "photo": "images/ced.jfif",
+    },
+    {
+        "name": "Karl G. De Castro",
+        "role": "ML Engineer · Documentation",
+        "photo": "images/karl.jfif",
+    },
 ]
+
+
+@st.cache_data(show_spinner=False)
+def _cached_img_to_data_uri(path_string: str, suffix: str, file_size: int, modified_ns: int):
+    path = Path(path_string)
+    try:
+        image_data = path.read_bytes()
+        current = path.stat()
+    except OSError:
+        return None
+    if current.st_size != file_size or current.st_mtime_ns != modified_ns:
+        return None
+
+    mime_types = {
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg",
+        ".jfif": "image/jpeg",
+        ".png": "image/png",
+        ".webp": "image/webp",
+    }
+    mime = mime_types.get(suffix, "image/png")
+    encoded = base64.b64encode(image_data).decode("ascii")
+    return f"data:{mime};base64,{encoded}"
+
+
+def img_to_data_uri(rel_path: str):
+    for base in (APP_DIR, APP_DIR.parent):
+        path = base / rel_path
+        try:
+            stat = path.stat()
+        except OSError:
+            continue
+        if path.is_file():
+            return _cached_img_to_data_uri(
+                str(path), path.suffix.lower(), stat.st_size, stat.st_mtime_ns
+            )
+    return None
 
 
 def render_landing_page():
@@ -83,9 +137,19 @@ def render_landing_page():
         team_cols = st.columns(3, gap="large")
         for col, member in zip(team_cols, TEAM_MEMBERS):
             with col:
+                photo = img_to_data_uri(member.get("photo", ""))
+                if photo:
+                    avatar_html = (
+                        f'<img class="team-avatar-photo" src="{photo}" '
+                        f'alt="Photo of {member["name"]}">'
+                    )
+                else:
+                    avatar_html = (
+                        f'<div class="team-avatar-placeholder">{AVATAR_SVG}</div>'
+                    )
                 st.markdown(
                     f'<div class="team-card-landing">'
-                    f'<div class="team-avatar-placeholder">{AVATAR_SVG}</div>'
+                    f'{avatar_html}'
                     f'<div class="team-name-landing">{member["name"]}</div>'
                     f'<div class="team-role-landing">{member["role"]}</div>'
                     f'</div>',

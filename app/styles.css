@@ -569,6 +569,17 @@ section[data-testid="stMain"] .block-container h5 {
     margin: 0 auto 14px auto;
 }
 
+.team-card-landing .team-avatar-photo {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 14px auto;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .team-name-landing {
     font-size: 15px;
     font-weight: 700;
